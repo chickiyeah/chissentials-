@@ -19,25 +19,45 @@ IF $isop || $haspermission:chissentials.world || $haspermission:chissentials.adm
 			ENDSYNC
 		ENDIF
 	ELSEIF args.length == 2
-		SYNC
-		player.teleport(location(args[0], parseInt(args[1]), 64, 81))
-		ENDSYNC
+		IF $isnumber:args[1]
+			SYNC
+			player.teleport(location(args[0], parseInt(args[1]), 64, 81))
+			ENDSYNC
+		ELSE
+			#MESSAGE "&6&l치센셜 &f&l: &4&l좌표는 숫자만 입력해야합니다."
+		ENDIF
 	ELSEIF args.length == 3
-		SYNC
-		player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), 81))
-		ENDSYNC
+		IF $isnumber:args[1] && $isnumber:args[2]
+			SYNC
+			player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), 81))
+			ENDSYNC
+		ELSE
+			#MESSAGE "&6&l치센셜 &f&l: &4&l좌표는 숫자만 입력해야합니다."
+		ENDIF
 	ELSEIF args.length == 4
-		SYNC
-		player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), parseInt(args[3])))
-		ENDSYNC
+		IF $isnumber:args[1] && $isnumber:args[2] && $isnumber:args[3]
+			SYNC
+			player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), parseInt(args[3])))
+			ENDSYNC
+		ELSE
+			#MESSAGE "&6&l치센셜 &f&l: &4&l좌표는 숫자만 입력해야합니다."
+		ENDIF
 	ELSEIF args.length == 5
-		SYNC
-		player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4])))
-		ENDSYNC
+		IF $isnumber:args[1] && $isnumber:args[2] && $isnumber:args[3] && $isnumber:args[4]
+			SYNC
+			player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4])))
+			ENDSYNC
+		ELSE
+			#MESSAGE "&6&l치센셜 &f&l: &4&l좌표는 숫자만 입력해야합니다."
+		ENDIF
 	ELSEIF args.length == 6
-		SYNC
-		player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4]), parseInt(args[5])))
-		ENDSYNC
+		IF $isnumber:args[1] && $isnumber:args[2] && $isnumber:args[3] && $isnumber:args[4] && $isnumber:args[5]
+			SYNC
+			player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), parseInt(args[3]), parseInt(args[4]), parseInt(args[5])))
+			ENDSYNC
+		ELSE
+			#MESSAGE "&6&l치센셜 &f&l: &4&l좌표는 숫자만 입력해야합니다."
+		ENDIF
 	ELSE
 	ENDIF
 ELSE

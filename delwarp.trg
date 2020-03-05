@@ -8,10 +8,10 @@ IF $isop || $haspermission:chissentials.delwarp || $haspermission:chissentials.a
 	configFile = File("./plugins/TriggerReactor/config-warp.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 	list = configYml.get("WarpList")
-	IF args.length == 0
-		#MESSAGE "&f&l명령어 &f: /delwarp <워프이름>"
+	IF list.size() == 0
+		#MESSAGE "&6&l치센셜 &f: 이 서버엔 어떠한 워프도 없습니다 치센셜로 워프를 추가한것이 맞나요?"
 	ELSE
-		IF list != null
+		IF args.length == 0
 			IF list.contains(args[0])
 				list.remove(args[0])
 				configYml.save(configFile)
@@ -20,7 +20,7 @@ IF $isop || $haspermission:chissentials.delwarp || $haspermission:chissentials.a
 				#MESSAGE "&6&l치센셜 &f: 입력하신 이름&e&l"+args[0]+"&f을 가진 워프는 없습니다"
 			ENDIF
 		ELSE
-			#MESSAGE "&6&l치센셜 &f: 이 서버엔 어떠한 워프도 없습니다 치센셜로 워프를 추가한것이 맞나요?"
+			#MESSAGE "&f&l명령어 &f: /delwarp <워프이름>"
 		ENDIF
 	ENDIF
 ELSE

@@ -8,7 +8,7 @@ IF $isop || $haspermission:chissentials.warplist || $haspermission:chissentials.
 	configFile = File("./plugins/TriggerReactor/config-warp.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 	list = configYml.get("WarpList")
-	IF list != null
+	IF list.size() != 0
 		b = list.size()
 		FOR i = 0:b
 			name = list.get(i)

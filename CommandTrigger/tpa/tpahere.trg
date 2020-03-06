@@ -43,6 +43,7 @@ IF args.length == 1
 		player.sendMessage(color("&6&l치센셜 &f&l: &e&l"+args[0]+"&f 님을 &4&l찾을수 없습니다"))
 	ENDIF
 ELSE
+	player.sendMessage(color("&l명령어 &f: /tpahere <닉네임> - 지정한 플레이어에게 이쪽으로 오기를 물어봅니다"))
 ENDIF
 ELSE
 	#MESSAGE "&6&l치센셜 &f&l: &4&l이 명령어를 실행할 수 있는 권한이 없습니다."

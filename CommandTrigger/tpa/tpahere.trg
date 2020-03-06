@@ -37,7 +37,7 @@ IF args.length == 1
 		ENDFOR
 			configYml.save(configFile)
 		ELSE
-			player(args[0]).sendMessage(color("&6&l치센셜 &f&l: &4&l자기 자신에겐 tpahere요청을 보낼수 없습니다"))//
+			player(args[0]).sendMessage(color("&6&l치센셜 &f&l: &4&l자기 자신에겐 tpahere요청을 보낼수 없습니다"))
 		ENDIF
 	ELSE
 		player.sendMessage(color("&6&l치센셜 &f&l: &e&l"+args[0]+"&f 님을 &4&l찾을수 없습니다"))

@@ -27,6 +27,11 @@ IF args.length == 1
 		player(args[0]).setGameMode("SPECTATOR")
 		ENDSYNC
 		player.sendMessage(color("&6&l치센셜 &f&l: &e&l"+args[0]+"&f 님의 게임모드를 &e&l관전자&f모드로 설정했습니다."))
+		FOR i = 0:size
+		nick = players.get(i)
+		list.remove(nick.getName())
+		ENDFOR
+		configYml.save(configFile)
 	ELSE
 	player.sendMessage(color("&6&l치센셜 &f&l: &e&l"+args[0]+"&f 님을 &4&l찾을수 없습니다"))
 	ENDIF

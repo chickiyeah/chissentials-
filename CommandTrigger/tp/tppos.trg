@@ -363,7 +363,7 @@ IF $isop || $haspermission:chissentials.tppos || $haspermission:chissentials.adm
 				player.teleport(location(world, x, y, z, yaw, pitch))
 				ENDSYNC
 				player.sendMessage(color("&6&l치센셜 &f: &1X = "+x+" &a&lY = "+y+" &d&lZ = "+z+"&f 로 이동했습니다!"))
-			IF $isnumber:args[0] && $isnumber:args[1] && $isnumber:args[2] && $isnumber:args[4] && args[5] == "~"
+			ELSEIF $isnumber:args[0] && $isnumber:args[1] && $isnumber:args[2] && $isnumber:args[4] && args[5] == "~"
 				world = args[3]
 				x = parseInt(args[0])
 				y = parseInt(args[1])
@@ -605,7 +605,7 @@ IF $isop || $haspermission:chissentials.tppos || $haspermission:chissentials.adm
 				player.teleport(location(world, x, y, z, yaw, pitch))
 				ENDSYNC
 				player.sendMessage(color("&6&l치센셜 &f: &1X = "+x+" &a&lY = "+y+" &d&lZ = "+z+"&f 로 이동했습니다!"))
-			ELSEIF $isnumber:args[0] && args[1] == "~" && args[2] == "~" && $isnumber:args[4] && args[5] = "~"
+			ELSEIF $isnumber:args[0] && args[1] == "~" && args[2] == "~" && $isnumber:args[4] && args[5] == "~"
 				world = args[3]
 				x = parseInt(args[0])
 				y = player.getLocation().getY()
@@ -616,7 +616,7 @@ IF $isop || $haspermission:chissentials.tppos || $haspermission:chissentials.adm
 				player.teleport(location(world, x, y, z, yaw, pitch))
 				ENDSYNC
 				player.sendMessage(color("&6&l치센셜 &f: &1X = "+x+" &a&lY = "+y+" &d&lZ = "+z+"&f 로 이동했습니다!"))
-			ELSEIF $isnumber:args[0] && args[1] == "~" && args[2] == "~" && args[4] == "~" && args[5] = "~"
+			ELSEIF $isnumber:args[0] && args[1] == "~" && args[2] == "~" && args[4] == "~" && args[5] == "~"
 				world = args[3]
 				x = parseInt(args[0])
 				y = player.getLocation().getY()
@@ -649,7 +649,7 @@ IF $isop || $haspermission:chissentials.tppos || $haspermission:chissentials.adm
 				player.teleport(location(world, x, y, z, yaw, pitch))
 				ENDSYNC
 				player.sendMessage(color("&6&l치센셜 &f: &1X = "+x+" &a&lY = "+y+" &d&lZ = "+z+"&f 로 이동했습니다!"))
-			ELSEIF args[0] == "~" && args[1] == "~" && args[2] == "~" && $isnumber:args[4] && args[5] = "~"
+			ELSEIF args[0] == "~" && args[1] == "~" && args[2] == "~" && $isnumber:args[4] && args[5] == "~"
 				world = args[3]
 				x = player.getLocation().getX()
 				y = player.getLocation().getY()
@@ -671,7 +671,7 @@ IF $isop || $haspermission:chissentials.tppos || $haspermission:chissentials.adm
 				player.teleport(location(world, x, y, z, yaw, pitch))
 				ENDSYNC
 				player.sendMessage(color("&6&l치센셜 &f: &1X = "+x+" &a&lY = "+y+" &d&lZ = "+z+"&f 로 이동했습니다!"))
-			ELSEIF args[0] == "~" && args[1] == "~" && args[2] == "~" && args[4] == "~" && args[5] = "~"
+			ELSEIF args[0] == "~" && args[1] == "~" && args[2] == "~" && args[4] == "~" && args[5] == "~"
 				world = args[3]
 				x = player.getLocation().getX()
 				y = player.getLocation().getY()

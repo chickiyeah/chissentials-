@@ -21,7 +21,6 @@ IF {"warptrigloadbefore"} == "true"
 					{args[0]+"warpyaw"} = player.getLocation().getYaw()
 					{args[0]+"warppitch"} = player.getLocation().getPitch()
 					warpname = args[0]
-					//configYml.set("WarpList."+warpname, null)//
 					list.remove(warpname)
 					list.add(warpname)
 					configYml.set("Warplist."+warpcount+",WarpName", warpname)
@@ -46,6 +45,44 @@ IF {"warptrigloadbefore"} == "true"
 				configYml.save(configFile)
 				//list.add(args[0])//
 				#MESSAGE "&6&l치센셜 &f: &e&l"+args[0]+"&f라는 이름의 워프를 추가했습니다."
+			ENDIF
+		ELSEIF args.length >= 2
+			IF {args[0]+"warp"} == true
+				IF {args[0]+"warpover"} == "true"
+					{args[0]+"world"} = player.getLocation().getWorld().getName().toString()
+					{args[0]+"warpx"} = player.getLocation().getX()
+					{args[0]+"warpy"} = player.getLocation().getY()
+					{args[0]+"warpz"} = player.getLocation().getZ()
+					{args[0]+"warpyaw"} = player.getLocation().getYaw()
+					{args[0]+"warppitch"} = player.getLocation().getPitch()
+					{args[0]+"warpmessage"} = $cmdline:2
+					warpname = args[0]
+					list.remove(warpname)
+					list.add(warpname)
+					configYml.set("Warplist."+warpcount+",WarpName", warpname)
+					configYml.save(configFile)
+					{args[0]+"warp"} = "true"
+					{args[0]+"warpover"} = "false"
+					#MESSAGE "&6&l치센셜 &f: &e&l"+args[0]+"&f라는 이름의 워프를 추가했습니다."
+					#MESSAGE "&6&l치센셜 &f: &f 이제 이 워프로 이동시 "+{args[0]+"warpmessage"}+"&f라는 메시지를 출력합니다"
+				ELSE
+					#MESSAGE "&6&l치센셜 &f: &4이미 존재하는 워프입니다 &f덮어 씌우려면 다시 입력해주세요."
+					{args[0]+"warpover"} = "true"
+				ENDIF
+			ELSE
+				{args[0]+"warpx"} = player.getLocation().getX()
+				{args[0]+"warpy"} = player.getLocation().getY()
+				{args[0]+"warpz"} = player.getLocation().getZ()
+				{args[0]+"warpyaw"} = player.getLocation().getYaw()
+				{args[0]+"warppitch"} = player.getLocation().getPitch()
+				{args[0]+"warp"} = "true"
+				{args[0]+"warpname"} = args[0]
+				warpname = args[0]
+				list.add(warpname)
+				configYml.save(configFile)
+				{args[0]+"warpmessage"} = $cmdline:2
+				#MESSAGE "&6&l치센셜 &f: &e&l"+args[0]+"&f라는 이름의 워프를 추가했습니다."
+				#MESSAGE "&6&l치센셜 &f: &f 이제 이 워프로 이동시 "+{args[0]+"warpmessage"}+"&f라는 메시지를 출력합니다"
 			ENDIF
 		ENDIF
 	ELSE

@@ -13,6 +13,7 @@ i=i+1
 							IF i == 120
 								player(args[1]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청이 &4&l만료&f되었습니다."))
 								{"tpa"+args[0]} = null
+								{"tpa"+args[1]} = null
 								#STOP
 							ELSE
 							ENDIF
@@ -21,7 +22,9 @@ i=i+1
 						player(args[0]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청이 &4&l거절&f처리 되었습니다."))
 						player(args[1]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청이 &4&l거절&f처리 되었습니다."))
 						{"tpdeny"+args[0]} = null
+						{"tpdeny"+args[1]} = null
 						{"tpa"+args[0]} = null
+						{"tpa"+args[1]} = null
 						#STOP
 					ENDIF
 				ELSE
@@ -29,14 +32,18 @@ i=i+1
 					player(args[1]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청이 &a&l수락&f처리 되었습니다."))
 					player(args[1]).teleport(player(args[0]).getLocation())
 					{"tpaccept"+args[0]} = null
+					{"tpaccept"+args[1]} = null
 					{"tpa"+args[0]} = null
+					{"tpa"+args[1]} = null
 					#STOP
 				ENDIF
 			ELSE
 				player(args[0]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청이 &4&l거절&f처리 되었습니다."))
 				player(args[1]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청이 &4&l거절&f처리 되었습니다."))
 				{"tpno"+args[0]} = null
+				{"tpno"+args[1]} = null
 				{"tpa"+args[0]} = null
+				{"tpa"+args[1]} = null
 				#STOP
 			ENDIF
 		ELSE
@@ -44,14 +51,18 @@ i=i+1
 			player(args[1]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청이 &a&l수락&f처리 되었습니다."))
 			player(args[1]).teleport(player(args[0]).getLocation())
 			{"tpyes"+args[0]} = null
+			{"tpyes"+args[1]} = null
 			{"tpa"+args[0]} = null
+			{"tpa"+args[1]} = null
 			#STOP
 		ENDIF
 	ELSE
 		player(args[0]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청이 &4&l취소&f되었습니다."))
 		player(args[1]).sendMessage(color("&6&l치센셜 &f: 텔레포트 요청을 &4&l취소&f했습니다."))
 		{"tpacancel"+args[1]} = null
+		{"tpacancel"+args[0]} = null
 		{"tpa"+args[0]} = null
+		{"tpa"+args[1]} = null
 		#STOP
 	ENDIF
 ENDWHILE

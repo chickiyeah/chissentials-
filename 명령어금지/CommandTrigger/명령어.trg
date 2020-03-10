@@ -61,4 +61,5 @@ ELSE
 	ENDIF	
 ENDIF
 ELSE
+	#MESSAGE "&6&l[&4&l!&6&l] &f&l: &4&l이 명령어를 실행할 수 있는 권한이 없습니다."
 ENDIF

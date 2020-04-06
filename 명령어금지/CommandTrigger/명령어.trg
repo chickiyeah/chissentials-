@@ -3,7 +3,7 @@
 import java.io.File
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/config-cmd-blacklist.yml")
+	configFile = File("./plugins/TriggerReactor/chissentials/config-cmd-blacklist.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 	IF !configFile.exists()
 	Bukkit.getConsoleSender().sendMessage("[bancommand] config 파일 생성중...")
@@ -15,7 +15,7 @@ import org.bukkit.Bukkit
 	ENDIF
 	list = configYml.get("blacklist")
 
-IF $isop || $haspermission:chissentials.명령어 || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.명령어" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.bancommand"
 IF args.length == 0
 	#MESSAGE "&l명령어 &f: /명령어 허용 <커맨드> , /명령어 금지 <커맨드>"
 ELSE

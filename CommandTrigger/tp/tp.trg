@@ -1,4 +1,4 @@
-IF $isop || $haspermission:chissentials.tp || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.tp" || $haspermission:"chissentials.admin"
 IF args.length == 0
 	player.sendMessage(color("&f&l도움말 &f: /tp <닉네임> <다른닉네임>"))
 ELSE

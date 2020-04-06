@@ -3,7 +3,7 @@
 import java.io.File
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/config-tpa-player.yml")
+	configFile = File("./plugins/TriggerReactor/chissentials/config-tpa-player.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 IF {"TPALOADBEFORE"} != "true"
 	configYml.set("PlayerList", list())
@@ -11,7 +11,7 @@ IF {"TPALOADBEFORE"} != "true"
 	{"TPADLOADBEFORE"} = "true"
 ELSE
 ENDIF
-IF $isop || $haspermission:chissentials.tpahere || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.tpahere" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.user"
 IF args.length == 1
 	list = configYml.get("PlayerList")
 	players = Bukkit.getOnlinePlayers()

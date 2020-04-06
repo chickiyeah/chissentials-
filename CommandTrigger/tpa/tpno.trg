@@ -1,6 +1,6 @@
 //치센셜 tpno//
 //Made by Chickiyeah//
-IF $isop || $haspermission:chissentials.tpno || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.tpno" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.user"
 IF {"tpa"+$playername} == "true"
 	{"tpno"+$playername} = "true"
 ELSE

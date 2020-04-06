@@ -1,6 +1,6 @@
 //치센셜 tppos//
 //Made by Chickiyeah//
-IF $isop || $haspermission:chissentials.tppos || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.tppos" || $haspermission:"chissentials.admin"
 	IF args.length == 0
 		#MESSAGE "&l명령어 : &f/tppos <x> <y> <z> [world] [yaw] [pitch]"
 	ELSE

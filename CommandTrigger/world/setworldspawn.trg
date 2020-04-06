@@ -1,6 +1,6 @@
 //치센셜 setworldspawn//
 //Made by Chickiyeah//
-IF $isop || $haspermission:chissentials.setworldspawn || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.setworldspawn" || $haspermission:"chissentials.admin"
 	IF args.length == 0
 		world = player.getLocation().getWorld().getName().toString()
 		{world+"x"} = player.getLocation().getX()

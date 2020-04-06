@@ -4,8 +4,8 @@ import java.io.File
 import java.util.Base64
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-IF $isop || $haspermission:chissentials.delwarp || $haspermission:chissentials.admin
-	configFile = File("./plugins/TriggerReactor/config-warp.yml")
+IF $isop || $haspermission:"chissentials.delwarp" || $haspermission:"chissentials.admin"
+	configFile = File("./plugins/TriggerReactor/chissentials/config-warp.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 	list = configYml.get("WarpList")
 	IF list.size() == 0

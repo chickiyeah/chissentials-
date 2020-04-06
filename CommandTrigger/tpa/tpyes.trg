@@ -1,6 +1,6 @@
 //치센셜 tpyes//
 //Made by Chickiyeah//
-IF $isop || $haspermission:chissentials.tpyes || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.tpyes" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.user"
 IF {"tpa"+$playername} == "true"
 	{"tpyes"+$playername} = "true"
 ELSE

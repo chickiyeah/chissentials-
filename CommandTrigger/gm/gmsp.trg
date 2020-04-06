@@ -3,7 +3,7 @@
 import java.io.File
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/config-gmsp-player.yml")
+	configFile = File("./plugins/TriggerReactor/chissentials/config-gmsp-player.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 IF {"GMSPLOADBEFORE"} != "true"
 	configYml.set("PlayerList", list())
@@ -11,7 +11,7 @@ IF {"GMSPLOADBEFORE"} != "true"
 	{"GMSPLOADBEFORE"} = "true"
 ELSE
 ENDIF
-IF $isop || $haspermission:chissentials.gmsp || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.gmsp" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.gmset"
 IF args.length == 1
 	list = configYml.get("PlayerList")
 	players = Bukkit.getOnlinePlayers()

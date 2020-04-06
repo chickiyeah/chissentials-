@@ -1,6 +1,6 @@
 //치센셜 world//
 //Made by Chickiyeah//
-IF $isop || $haspermission:chissentials.world || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.admin"
 	IF args.length == 0
 		#MESSAGE "&l명령어 : &f/world <월드> [x] [y] [z]"
 	ELSEIF args.length == 1

@@ -5,7 +5,7 @@ import java.util.Base64
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
 IF {"warptrigloadbefore"} == "true"
-	IF $isop || $haspermission:chissentials.setwarp || $haspermission:chissentials.admin
+	IF $isop || $haspermission:"chissentials.setwarp" || $haspermission:"chissentials.admin"
 	configFile = File("./plugins/TriggerReactor/config-warp.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 	list = configYml.get("WarpList")

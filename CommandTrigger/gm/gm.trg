@@ -3,7 +3,7 @@
 import java.io.File
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/config-gm-player.yml")
+	configFile = File("./plugins/TriggerReactor/chissentials/config-gm-player.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 IF {"GMLOADBEFORE"} != "true"
 	configYml.set("PlayerList", list())
@@ -11,7 +11,7 @@ IF {"GMLOADBEFORE"} != "true"
 	{"GMLOADBEFORE"} = "true"
 ELSE
 ENDIF
-IF $isop || $haspermission:chissentials.gm || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.gm" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.gmset"
 	IF args.length == 0
 		player.sendMessage(color("&l명령어 &f:/gm 0 [닉네임] - 서바이벌모드로 설정합니다."))
 		player.sendMessage(color("&l명령어 &f:/gm 1 [닉네임] - 크리에이티브모드로 설정합니다."))

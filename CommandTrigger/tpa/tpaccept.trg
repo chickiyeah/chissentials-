@@ -1,6 +1,6 @@
 //치센셜 tpaccept//
 //Made by Chickiyeah//
-IF $isop || $haspermission:chissentials.tpaccept || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.tpaccept" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.user"
 IF {"tpa"+$playername} == "true"
 	{"tpaccept"+$playername} = "true"
 ELSE

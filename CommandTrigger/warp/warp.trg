@@ -4,7 +4,7 @@ import java.io.File
 import java.util.Base64
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-IF $isop || $haspermission:chissentials.warp || $haspermission:chissentials.admin
+IF $isop || $haspermission:"chissentials.warp" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.user"
 	configFile = File("./plugins/TriggerReactor/config-warp.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 	list = configYml.get("WarpList")

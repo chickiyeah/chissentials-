@@ -25,7 +25,7 @@ ELSE
 	ELSE
 	list.add($cmdline:2)
 	#MESSAGE "&6&l[&4&l!&6&l] &e&l"+$cmdline:2+"를 &4&l금지 &f커맨드로 추가했습니다"
-	Bukkit.getConsoleSender().sendMessage("[bancommand] 관리자 &e&l"+$playername+"님이 &f&l"+$cmdline:2+"를 &4&l금지 &f커맨드로 추가했습니다")
+	Bukkit.getConsoleSender().sendMessage("[bancommand] 관리자 "+$playername+"님이 "+$cmdline:2+"를 금지 커맨드로 추가했습니다")
 	configYml.save(configFile)
 	ENDIF
 	ELSE

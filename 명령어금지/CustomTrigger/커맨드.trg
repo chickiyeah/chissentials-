@@ -1,7 +1,7 @@
 import java.io.File
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/config-cmd-blacklist.yml")
+	configFile = File("./plugins/TriggerReactor/chissentials/config-cmd-blacklist.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 list = configYml.get("blacklist")
 IF list.contains($cmdline)

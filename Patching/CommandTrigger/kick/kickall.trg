@@ -97,14 +97,18 @@ LogYml.save(logFile)
 IF kickplayer.size == 0
 IF {"kickalllogtime"} == "true"
 log.add($realdate+"  관리자 "+$playername+"이 전체인원 "+size+"명중 관리자를 제외한 인원 "+kickno+"명을 추방시도하였습니다")
+log.add($realdate+" 관리자 "+$playername+"님이 전체 추방 명령어를 사용하였지만 추방인원이 없습니다 (모든 인원이 관리자이거나 서버에 사용자 한명밖에 없습니다)")
+log.add($realdate+" 추방인원 상세 : "+kickplayer+" 총 "+kickplayer.size+"명 추방 실시자 : "+$playername)
 ELSE
 log.add("관리자 "+$playername+"이 전체인원 "+size+"명중 관리자를 제외한 인원 "+kickno+"명을 추방시도하였습니다")
+log.add("관리자 "+$playername+"님이 전체 추방 명령어를 사용하였지만 추방인원이 없습니다 (모든 인원이 관리자이거나 서버에 사용자 한명밖에 없습니다)")
+log.add("추방인원 상세 : "+kickplayer+" 총 "+kickplayer.size+"명 추방 실시자 : "+$playername)
 ENDIF
 player.sendMessage(color("추방인원이 없습니다 (모든 인원이 관리자이거나 서버에 사용자 한명밖에 없습니다)"))
 #LOG "관리자 "+$playername+"님이 전체 추방 명령어를 사용하였지만 추방인원이 없습니다 (모든 인원이 관리자이거나 서버에 사용자 한명밖에 없습니다)"
-log.add($realdate+" 관리자 "+$playername+"님이 전체 추방 명령어를 사용하였지만 추방인원이 없습니다 (모든 인원이 관리자이거나 서버에 사용자 한명밖에 없습니다)")
+
 ELSE
-log.add($realdate+" 추방인원 상세 : "+kickplayer+" 총 "+kickplayer.size+"명 추방 실시자 : "+$playername)
+
 player.sendMessage(color("추방인원 상세 : "+kickplayer+" 총 "+kickplayer.size+"명"))
 #LOG "관리자 "+$playername+"이 전체인원 "+size+"명중 관리자를 제외한 인원 "+kickno+"명을 추방하였습니다"
 ENDIF

@@ -39,10 +39,11 @@ IF !configFile.exists()
 #LOG "[chissentials module](kickall) 컨피그 파일을 생성중입니다"
 	
 	configYml.set("PlayerList", list())
+	configYml.set("size = 전체인원수 kickno = 추방당한인원수", list())
 	configYml.set("kickmsg", list())
 	configYml.save(configFile)
 	msg = configYml.get("kickmsg")
-	msg.add("&f&l전체인원 &a&l"+size+"명중 &f&l관리자를 제외한 인원 &e&l"+kickno+"명을 &f&l추방하였습니다")
+	msg.add("&f&l전체인원 &a&lsize명중 &f&l관리자를 제외한 인원 &e&lkickno명을 &f&l추방하였습니다")
 	configYml.save(configFile)
 ELSE
 ENDIF

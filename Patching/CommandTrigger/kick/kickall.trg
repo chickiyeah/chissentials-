@@ -5,6 +5,8 @@ import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
 import java.io.BufferedWriter
 import java.io.FileWriter
+import java.lang.String
+import java.lang.Integer
 	chissentialspath = File("./plugins/TriggerReactor/chissentials")
 	configpath = File("./plugins/TriggerReactor/chissentials/config")
 	logpath = File("./plugins/TriggerReactor/chissentials/log")
@@ -73,8 +75,9 @@ IF $isop || $haspermission:"chissentials.kickall" || $haspermission:"chissential
 		ENDIF
 	ENDFOR
 msg = msg.get(0)
-size = size.toString()
-kickno = kickno.toString()
+forsize = size
+size = Integer.toString(size)
+kickno = Integer.toString(kickno)
 msg = msg.replace("size", size)
 msg = msg.replace("kickno", kickno)
 player.sendMessage(color(msg))
@@ -85,7 +88,7 @@ ELSE
 player.sendMessage(color("추방인원 상세 : "+kickplayer+" 총 "+kickplayer.size+"명"))
 #LOG "관리자 "+$playername+"이 전체인원 "+size+"명중 관리자를 제외한 인원 "+kickno+"명을 추방하였습니다"
 ENDIF
-		FOR i = 0:size
+		FOR i = 0:forsize
 		nick = players.get(i)
 		list.remove(nick.getName())
 		ENDFOR

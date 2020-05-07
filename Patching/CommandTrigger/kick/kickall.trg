@@ -10,6 +10,15 @@ import java.lang.Integer
 	chissentialspath = File("./plugins/TriggerReactor/chissentials")
 	configpath = File("./plugins/TriggerReactor/chissentials/config")
 	logpath = File("./plugins/TriggerReactor/chissentials/log")
+	datepath = File("./plugins/TriggerReactor/Placeholder/realdate.js")
+
+IF !datepath.exists()
+	#LOG "[chissentials] 날짜 묘듈을 찾지 못하였습니다 로그파일에 날짜/시간을 표시하지 않습니다"
+	#MESSAGE "&6[chissentials] &f날짜 묘듈을 찾지 못하였습니다 로그파일에 날짜/시간을 표시하지 않습니다"
+	{"kickalllogtime"} = "false"
+ELSE
+	{"kickalllogtime"} = "true"
+ENDIF
 
 IF !chissentialspath.exists()
 	chissentialspath.mkdir()
@@ -56,7 +65,8 @@ IF !logFile.exists()
 ELSE
 ENDIF
 
-	msg = configYml.get("kickmsg")
+log = LogYml.get("log")
+msg = configYml.get("kickmsg")
 kickplayer = list()
 IF $isop || $haspermission:"chissentials.kickall" || $haspermission:"chissentials.admin"
 	list = configYml.get("PlayerList")
@@ -82,6 +92,12 @@ kickno = Integer.toString(kickno)
 msg = msg.replace("size", size)
 msg = msg.replace("kickno", kickno)
 player.sendMessage(color(msg))
+IF {"kickalllogtime"} == "true"
+log.add($realdate+"  관리자 "+$playername+"이 전체인원 "+size+"명중 관리자를 제외한 인원 "+kickno+"명을 추방시도하였습니다")
+ELSE
+log.add("관리자 "+$playername+"이 전체인원 "+size+"명중 관리자를 제외한 인원 "+kickno+"명을 추방시도하였습니다")
+ENDIF
+LogYml.save(logFile)
 IF kickplayer.size == 0
 player.sendMessage(color("추방인원이 없습니다 (모든 인원이 관리자이거나 서버에 사용자 한명밖에 없습니다)"))
 #LOG "관리자 "+$playername+"님이 전체 추방 명령어를 사용하였지만 추방인원이 없습니다 (모든 인원이 관리자이거나 서버에 사용자 한명밖에 없습니다)"

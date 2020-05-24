@@ -65,7 +65,7 @@ ENDIF
 
 log = LogYml.get("log")
 ban = configYml.get("BanBlockList")
-IF $isop || $haspermisson:"chissentials.banblock-place"
+IF $isop || $haspermisson:"chissentials.banitem"
 	IF args.length == 0
 		#MESSAGE "/밴아이템 추가 - 손에 들고있는 블럭을 설치 금지 블럭으로 설정합니다"
 		#MESSAGE "/밴아이템 삭제 - 손에 들고있는 블럭을 설치 금지 블럭에서 삭제합니다"	

@@ -29,7 +29,7 @@ IF args.length == 1
 		player.sendMessage(color("&6&l치센셜 &f&l: &e&l"+args[0]+"&f 님의 게임모드를 &e&l서바이벌&f모드로 설정했습니다."))
 		FOR i = 0:size
 		nick = players.get(i)
-		ist.remove(nick.getName())
+		list.remove(nick.getName())
 		ENDFOR
 		configYml.save(configFile)
 	ELSE

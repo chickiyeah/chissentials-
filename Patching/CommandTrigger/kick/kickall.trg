@@ -48,9 +48,14 @@ IF !configFile.exists()
 #LOG "[chissentials module](kickall) 컨피그 파일을 생성중입니다"
 	
 	configYml.set("PlayerList", list())
-	configYml.set("size = 전체인원수 kickno = 추방당한인원수", list())
+	configYml.set("아래 메시지의 변수 : size = 전체인원수 kickno = 추방당한인원수", list())
 	configYml.set("kickmsg", list())
+	configYml.set("아래 메시지는 추방당한 유저에게 보여지는 메시지 입니다", list())
+	configYml.set("아래 메시지 설정은 변수와 색깔이 적용되지 않습니다", list())
+	configYml.set("kickclient", list())
 	configYml.save(configFile)
+	kickclient = configYml.get("kickclient")
+	kickclient.add("킥올에 의해 추방되었습니다 밴이 아닙니다 걱정하지마세요!")
 	msg = configYml.get("kickmsg")
 	msg.add("&f&l전체인원 &a&lsize명중 &f&l관리자를 제외한 인원 &e&lkickno명을 &f&l추방하였습니다")
 	configYml.save(configFile)
@@ -65,9 +70,11 @@ IF !logFile.exists()
 ELSE
 ENDIF
 
+kickclient = configYml.get("kickclient")
 log = LogYml.get("log")
 msg = configYml.get("kickmsg")
 kickplayer = list()
+kickmsg = kickclient.get(0)
 IF $isop || $haspermission:"chissentials.kickall" || $haspermission:"chissentials.admin"
 	list = configYml.get("PlayerList")
 	players = Bukkit.getOnlinePlayers()
@@ -79,7 +86,7 @@ IF $isop || $haspermission:"chissentials.kickall" || $haspermission:"chissential
 		IF player(name).isOp()
 		ELSE
 		SYNC
-		player(name).kickPlayer("킥올에 의하여 추방되었습니다")
+		player(name).kickPlayer(kickmsg)
 		kickplayer.add(name)
 		ENDSYNC
 		kickno = kickno + 1
@@ -113,6 +120,7 @@ player.sendMessage(color("추방인원 상세 : "+kickplayer+" 총 "+kickplayer.
 #LOG "관리자 "+$playername+"이 전체인원 "+size+"명중 관리자를 제외한 인원 "+kickno+"명을 추방하였습니다"
 ENDIF
 LogYml.save(logFile)
+	players = Bukkit.getOnlinePlayers()
 		FOR i = 0:forsize
 		nick = players.get(i)
 		list.remove(nick.getName())

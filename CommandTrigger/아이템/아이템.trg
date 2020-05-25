@@ -1,9 +1,14 @@
+import org.bukkit.enchantments.Enchantment
+import java.util.Arrays
+
 IF $isop || $haspermisson:"chissentials.itemset"
 	IF args.length == 0
-		#MESSAGE "<내용> - 필수로 써야하는 것입니다. (내용) - 선택적으로 사용할수 있습니다."
-		#MESSAGE "/아이템 이름설정 <이름> - 아이템의 이름을 설정합니다. 색깔 코드 가능"
-		#MESSAGE "/아이템 설명 추가 <라인(그냥 추가시 -1 > <설명> - 아이템의 설명(로어)을 추가합니다 색깔 코드 가능"
-		#MESSAGE "/아이템 설명 삭제 <라인> - 아이템의 설명(로어)를 삭제합니다"
+		#MESSAGE "&a&l<내용> &f&l- &6&l필수로 써야하는 것입니다. &e&l(내용) &f&l- &6&l선택적으로 사용할수 있습니다."
+		#MESSAGE "&6&l/아이템 이름설정 &a&l<이름> &f&l- &6&l아이템의 이름을 설정합니다. 색깔 코드 가능"
+		#MESSAGE "&6&l/아이템 설명 추가 &a&l<라인(그냥 추가시 -1 )> <설명> &f&l- &6&l아이템의 설명(로어)을 추가합니다. 색깔 코드 가능"
+		#MESSAGE "&6&l/아이템 설명 삭제 &a&l<라인> &f&l- &6&l아이템의 설명(로어)를 삭제합니다."
+		#MESSAGE "&6&l/아이템 인첸트 &a&l<인첸트명> &e&l(레벨) &f&l- &6&l아이템을 인첸트합니다."
+		#MESSAGE "&6&l/아이템 <파괴되지/부서지지> 않음 &f&l- &6&l아이템을 부서지지 않음 상태로 전환합니다. &d&l(재사용시 다시 내구도 상태로 돌아옵니다.)"
 	ELSE
 		IF args[0] == "이름설정"
 			IF player.getInventory().getItemInHand().getType().toString() == "AIR"
@@ -32,7 +37,7 @@ IF $isop || $haspermisson:"chissentials.itemset"
 		
 		IF args[0] == "설명"
 			IF args.length == 1
-				#MESSAGE "/아이템 설명 추가 <설명> (라인) - 아이템의 설명(로어)을 추가합니다 색깔 코드 가능"
+				#MESSAGE "/아이템 설명 추가 <라인(그냥 추가시 -1 )> <설명> - 아이템의 설명(로어)을 추가합니다 색깔 코드 가능"
 				#MESSAGE "/아이템 설명 삭제 <라인> - 아이템의 설명(로어)를 삭제합니다"
 				beforelore = player.getInventory().getItemInHand().getItemMeta().getLore()
 				#MESSAGE ""
@@ -61,7 +66,7 @@ IF $isop || $haspermisson:"chissentials.itemset"
 				#MESSAGE "&6&l명령어 사용전 손에 아이템을 들어주세요!"
 			ELSE
 				IF args.length == 2
-					#MESSAGE "/아이템 설명 추가 <라인(그냥 추가시 -1 > <설명> - 아이템의 설명(로어)을 추가합니다 색깔 코드 가능"
+					#MESSAGE "/아이템 설명 추가 <라인(그냥 추가시 -1 )> <설명> - 아이템의 설명(로어)을 추가합니다 색깔 코드 가능"
 					#STOP
 				ELSE
 				ENDIF
@@ -145,6 +150,35 @@ IF $isop || $haspermisson:"chissentials.itemset"
 					ENDIF
 				ENDIF
 			ENDIF
+		ELSE
+		ENDIF
+		
+		IF args[0] == "인첸트"
+			itemmeta = player.getInventory().getItemInHand().getItemMeta()	
+			enc = Enchantment.getByName(args[1])
+			IF enc == "null"
+				#MESSAGE "&6&l존재하지 않는 인첸트입니다."
+			ELSE
+				IF args.length == 2
+					itemmeta.addEnchant(enc, 1, "true")
+				ELSE
+					itemmeta.addEnchant(enc, parseInt(args[2]), "true")
+				ENDIF
+				player.getInventory().getItemInHand().setItemMeta(itemmeta)
+			ENDIF
+		ELSE
+		ENDIF
+		
+		IF args[0] == "파괴되지" || args[0] == "부서지지" && args[1] == "않음"
+			itemmeta = player.getInventory().getItemInHand().getItemMeta()
+			IF itemmeta.isUnbreakable() == "false"
+				itemmeta.setUnbreakable("true")
+				#MESSAGE "&6&l아이템을 부서지지 않음 상태로 설정하였습니다."
+			ELSE
+				itemmeta.setUnbreakable("false")
+				#MESSAGE "&6&l아이템을 부서지지 않음 상태에서 헤제하였습니다."
+			ENDIF
+			player.getInventory().getItemInHand().setItemMeta(itemmeta)
 		ELSE
 		ENDIF
 	ENDIF

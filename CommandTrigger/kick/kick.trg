@@ -3,14 +3,42 @@
 import java.io.File
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/chissentials/config-kick-player.yml")
-	configYml = YamlConfiguration.loadConfiguration(configFile)
-IF {"KICKLOADBEFORE"} != "true"
-	configYml.set("PlayerList", list())
-	configYml.save(configFile)
-	{"KICKLOADBEFORE"} = "true"
+	chissentialspath = File("./plugins/TriggerReactor/chissentials")
+	configpath = File("./plugins/TriggerReactor/chissentials/config")
+	logpath = File("./plugins/TriggerReactor/chissentials/log")
+	datepath = File("./plugins/TriggerReactor/Placeholder/realdate.js")
+
+IF !datepath.exists()
+	#LOG "[chissentials] 날짜 묘듈을 찾지 못하였습니다 로그파일에 날짜/시간을 표시하지 않습니다"
+	#MESSAGE "&6[chissentials] &f날짜 묘듈을 찾지 못하였습니다 로그파일에 날짜/시간을 표시하지 않습니다"
+	{"kicklogtime"} = "false"
+ELSE
+	{"kicklogtime"} = "true"
+ENDIF
+
+IF !chissentialspath.exists()
+	chissentialspath.mkdir()
+	#LOG "[chissentials] 트리거 폴더 (./plugins/TriggerReactor/chissentials)을/를 생성중입니다.)"
 ELSE
 ENDIF
+
+IF !configpath.exists()
+	configpath.mkdir()
+	#LOG "[chissentials] 트리거 폴더 (./plugins/TriggerReactor/chissentials/config)을/를 생성중입니다.)"
+ELSE
+ENDIF
+
+IF !logpath.exists()
+	logpath.mkdir()
+	#LOG "[chissentials] 트리거 폴터 (./plugins/TriggerReactor/chissentials/log)을/를 생성중입니다.)"
+ELSE
+ENDIF
+
+	configFile = File("./plugins/TriggerReactor/chissentials/config/config-kick-player.yml")
+	configYml = YamlConfiguration.loadConfiguration(configFile)
+	logFile = File("./plugins/TriggerReactor/chissentials/log/log-kick-player.yml")
+	LogYml = YamlConfiguration.loadConfiguration(logFile)
+	
 IF $isop || $haspermission:"chissentials.kick" || $haspermission:"chissentials.admin"
 		list = configYml.get("PlayerList")
 		players = Bukkit.getOnlinePlayers()

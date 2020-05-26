@@ -12,14 +12,12 @@ ELSE
 	syncitemmeta = syncitem.getItemMeta()
 ENDIF
 
-#BROADCAST event.getCurrentItem().getType()
 IF syncitemmeta == "null"
 ELSE
 	synclore = syncitemmeta.getLore()
 	IF synclore == "null"
 	ELSE
 		synclore = synclore.get(0)
-		#MESSAGE syncitemmeta.getLore().size()
 		IF slot == "38" || slot == "39" || slot == "37" || slot == "36" && syncitemmeta.getLore().size() == 2
 		IF syncitemmeta.getLore().get(1) == "§6§l착용중"
 			IF synclore.contains("§d§l체력") == "true"	
@@ -33,7 +31,6 @@ ELSE
 			synctotalhealth = syncplayerhealth - syncbonushealth
 				IF slot == "38" || slot == "39" || slot == "37" || slot == "36"
 					player.setMaxHealth(synctotalhealth)
-					#BROADCAST "감소"
 					synclore = syncitemmeta.getLore()
 					synclore.set(1, color("&4&l비착용중"))
 					syncitemmeta.setLore(synclore)
@@ -68,7 +65,6 @@ ELSE
 itemmeta = item.getItemMeta()
 ENDIF
 IF itemmeta == "null"
-#MESSAGE "itemmeta가 null"
 ELSE
 	lore = itemmeta.getLore()
 		IF lore == "null"

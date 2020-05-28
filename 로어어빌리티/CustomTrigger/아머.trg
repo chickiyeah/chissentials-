@@ -67,9 +67,39 @@ ELSE
 					player.getInventory().getItem(num).setItemMeta(syncitemmeta)
 				ELSE
 				ENDIF
+			
 			ELSE
 			ENDIF
-				
+			//워크속도
+			synclore = syncitemmeta.getLore()
+			syncsize = syncitemmeta.getLore().size()
+			FOR i = 0:size
+				synclore = syncitemmeta.getLore()
+				synclore = synclore.get(i).toString()
+				IF synclore.contains("§a§l걷는속도") == "true"
+					IF slot == "38" || slot == "39" || slot == "37" || slot == "36"
+						syncnowwalk = player.getWalkSpeed() // float
+						syncbonuswalk = synclore.replace("§a§l걷는속도 §e§l+","") // string
+						syncbonuswalk = syncbonuswalk.replace("§f","") // string
+						syncbonuswalk = newInstance("java.lang.Float",syncbonuswalk) // float
+						synctotalwalk = syncnowwalk - syncbonuswalk // double
+						synctotalwalk = newInstance("java.lang.Float",synctotalwalk) // float
+						player.setWalkSpeed(synctotalwalk)
+						
+						synclore = syncitemmeta.getLore()
+						IF synclore.contains("§6§l착용중")
+							num = synclore.indexOf("§6§l착용중")
+							synclore.set(num, color("&4&l비착용중"))
+							syncitemmeta.setLore(synclore)
+							num = parseInt(slot)
+							player.getInventory().getItem(num).setItemMeta(syncitemmeta)
+						ELSE
+						ENDIF	
+					ELSE
+					ENDIF
+				ELSE
+				ENDIF
+			ENDFOR
 		ELSE
 		ENDIF
 		ELSE
@@ -106,14 +136,14 @@ ELSE
 	lore = itemmeta.getLore()
 	lore = lore.get(i)
 	IF lore.contains("§d§l체력") == "true"	
-			bonushealth = lore.replace("§d§l체력 §e§l+","")
-			bonushealth = bonushealth.replace("§f","")
-			playerhealth = player.getMaxHealth()
-			bonushealth = parseInt(bonushealth)
-			playerhealth = Double.toString(playerhealth)
-			playerhealth = playerhealth.replace(".0","")
-			playerhealth = Integer.parseInt(playerhealth)
-			totalhealth = playerhealth + bonushealth
+			bonushealth = lore.replace("§d§l체력 §e§l+","") // string
+			bonushealth = bonushealth.replace("§f","") // string
+			playerhealth = player.getMaxHealth() // double
+			bonushealth = parseInt(bonushealth) // integer
+			playerhealth = Double.toString(playerhealth) // string
+			playerhealth = playerhealth.replace(".0","") // string
+			playerhealth = Integer.parseInt(playerhealth) // integer
+			totalhealth = playerhealth + bonushealth // integer
 		IF slot == "38" || slot == "39" || slot == "37" || slot == "36"
 			player.setMaxHealth(totalhealth)
 			lore = itemmeta.getLore()
@@ -121,7 +151,13 @@ ELSE
 				num = lore.indexOf("§4§l비착용중")
 				lore.set(num, color("&6&l착용중"))
 			ELSE
-				lore.add(0, color("&6&l착용중"))
+				IF lore.contains("§6§l착용중")
+				ELSE
+					IF lore.contains("§6§l착용중")
+					ELSE
+						lore.add(0, color("&6&l착용중"))
+					ENDIF
+				ENDIF
 			ENDIF
 			itemmeta.setLore(lore)
 			num = parseInt(slot)
@@ -132,6 +168,7 @@ ELSE
 	ENDIF
 	ENDFOR
 	
+	//플라이
 	lore = itemmeta.getLore()
 	IF lore.contains("§b§l플라이") == "true"
 		IF slot == "38" || slot == "39" || slot == "37" || slot == "36"
@@ -141,8 +178,12 @@ ELSE
 				num = lore.indexOf("§4§l비착용중")
 				lore.set(num, color("&6&l착용중"))
 			ELSE
-				lore.add(0, color("&6&l착용중"))
-			ENDIF				
+				IF lore.contains("§6§l착용중")
+				ELSE
+					lore.add(0, color("&6&l착용중"))
+				ENDIF
+			ENDIF
+		
 			itemmeta.setLore(lore)
 			num = parseInt(slot)
 			player.getInventory().getItem(num).setItemMeta(itemmeta)
@@ -150,5 +191,40 @@ ELSE
 		ENDIF
 	ELSE
 	ENDIF
+	
+	//워크속도
+	lore = itemmeta.getLore()
+	size = itemmeta.getLore().size()
+	FOR i = 0:size
+		lore = itemmeta.getLore()
+		lore = lore.get(i).toString()
+		IF lore.contains("§a§l걷는속도") == "true"
+			nowwalk = player.getWalkSpeed() // float
+			bonuswalk = lore.replace("§a§l걷는속도 §e§l+","") // string
+			bonuswalk = bonuswalk.replace("§f","") // string
+			bonuswalk = newInstance("java.lang.Float",bonuswalk)
+			totalwalk = nowwalk + bonuswalk
+			totalwalk = newInstance("java.lang.Float",totalwalk)
+			IF slot == "38" || slot == "39" || slot == "37" || slot == "36"
+				player.setWalkSpeed(totalwalk)
+				lore = itemmeta.getLore()
+				IF lore.contains("§4§l비착용중") == "true"
+					num = lore.indexOf("§4§l비착용중")
+					lore.set(num, color("&6&l착용중"))
+				ELSE
+					IF lore.contains("§6§l착용중")
+					ELSE
+						lore.add(0, color("&6&l착용중"))
+					ENDIF
+				ENDIF
+				
+				itemmeta.setLore(lore)
+				num = parseInt(slot)
+				player.getInventory().getItem(num).setItemMeta(itemmeta)
+			ELSE
+			ENDIF
+		ELSE
+		ENDIF
+	ENDFOR
 ENDIF
 ENDASYNC

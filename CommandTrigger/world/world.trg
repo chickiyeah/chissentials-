@@ -11,7 +11,7 @@ IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.
 		#MESSAGE "&6&l/world <월드> [x] [y] [z]"
 		IF $isop || $haspermission:"chissentials.worldloader" || $haspermission:"chissentials.admin"
 			#MESSAGE "&6&l/world load &b&l<월드이름(string)> (type)"
-			#MESSAGE "&6&l/world unload &b&l<월드이름(string)>"
+			#MESSAGE "&6&l/world unload &b&l<월드이름(string)>  (true or false)"
 		ELSE
 		ENDIF
 	ELSEIF args.length == 1
@@ -42,6 +42,19 @@ IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.
 				world = Bukkit.getServer().getWorlds().get(i).getName().toString()
 				worldlist.add(world)
 			ENDFOR
+			
+			IF args[0] == "unload"
+				IF worldlist.contains(args[1])
+					world = Bukkit.getWorld(args[1])	
+					Bukkit.getServer().unloadWorld(world, "true")
+					#STOP
+				ELSE
+					#MESSAGE "&6&l로드 되지 않거나 존재되지 않은 월드입니다."
+					#STOP
+				ENDIF
+			ELSE
+			ENDIF
+				
 			IF args[0] == "load"
 				IF args[1] == "null"
 					#MESSAGE "&6&l월드이름은 공백일 수 없습니다."
@@ -80,6 +93,25 @@ IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.
 		ENDIF
 	ELSEIF args.length == 3
 		IF $isop || $haspermission:"chissentials.worldloader" || $haspermission:"chissentials.admin"
+			size = Bukkit.getServer().getWorlds().size()
+			worldlist = list()
+			FOR i = 0:size
+				world = Bukkit.getServer().getWorlds().get(i).getName().toString()
+				worldlist.add(world)
+			ENDFOR
+			
+			IF args[0] == "unload"
+				IF worldlist.contains(args[1])
+					world = Bukkit.getWorld(args[1])	
+					Bukkit.getServer().unloadWorld(world, args[2])
+					#STOP
+				ELSE
+					#MESSAGE "&6&l로드 되지 않거나 존재되지 않은 월드입니다."
+					#STOP
+				ENDIF
+			ELSE
+			ENDIF
+			
 			IF args[0] == "load"
 			worldtype = list()
 			FOR c = WorldType.values()

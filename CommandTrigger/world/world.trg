@@ -12,9 +12,17 @@ IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.
 		IF $isop || $haspermission:"chissentials.worldloader" || $haspermission:"chissentials.admin"
 			#MESSAGE "&6&l/world load &b&l<월드이름(string)> (type)"
 			#MESSAGE "&6&l/world unload &b&l<월드이름(string)>  (true or false)"
+			#STOP
 		ELSE
 		ENDIF
-	ELSEIF args.length == 1
+	ELSE
+		world = Bukkit.getWorld(args[0])
+	ENDIF
+IF world != "null"
+loc = world.getSpawnLocation()
+y = loc.getY()
+z = loc.getZ()
+	IF args.length == 1
 		IF args[0] == "load"
 			#MESSAGE "&6&l월드이름은 공백일 수 없습니다."
 			#STOP
@@ -31,7 +39,7 @@ IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.
 			ENDSYNC
 		ELSE
 			SYNC
-			player.teleport(location(args[0], 12, 64, 81))
+			player.teleport(loc)
 			ENDSYNC
 		ENDIF
 	ELSEIF args.length == 2
@@ -86,7 +94,7 @@ IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.
 		ENDIF
 		IF $isnumber:args[1]
 			SYNC
-			player.teleport(location(args[0], parseInt(args[1]), 64, 81))
+			player.teleport(location(args[0], parseInt(args[1]), y, z))
 			ENDSYNC
 		ELSE
 			#MESSAGE "&6&l치센셜 &f&l: &4&l좌표는 숫자만 입력해야합니다."
@@ -160,7 +168,7 @@ IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.
 		ENDIF
 		IF $isnumber:args[1] && $isnumber:args[2]
 			SYNC
-			player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), 81))
+			player.teleport(location(args[0], parseInt(args[1]), parseInt(args[2]), z))
 			ENDSYNC
 		ELSE
 			#MESSAGE "&6&l치센셜 &f&l: &4&l좌표는 숫자만 입력해야합니다."
@@ -191,6 +199,9 @@ IF $isop || $haspermission:"chissentials.world" || $haspermission:"chissentials.
 		ENDIF
 	ELSE
 	ENDIF
+ELSE
+	#MESSAGE "&6&l존재하지 않는 월드입니다."
+ENDIF
 ELSE
 #MESSAGE "&6&l치센셜 &f&l: &4&l이 명령어를 실행할 수 있는 권한이 없습니다."
 ENDIF

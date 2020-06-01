@@ -47,7 +47,6 @@ ENDIF
 IF !configFile.exists()
 #LOG "[chissentials module](kickall) 컨피그 파일을 생성중입니다"
 	
-	configYml.set("PlayerList", list())
 	configYml.set("아래 메시지의 변수 : size = 전체인원수 kickno = 추방당한인원수", list())
 	configYml.set("kickmsg", list())
 	configYml.set("아래 메시지는 추방당한 유저에게 보여지는 메시지 입니다", list())
@@ -76,7 +75,7 @@ msg = configYml.get("kickmsg")
 kickplayer = list()
 kickmsg = kickclient.get(0)
 IF $isop || $haspermission:"chissentials.kickall" || $haspermission:"chissentials.admin"
-	list = configYml.get("PlayerList")
+	list = list()
 	players = Bukkit.getOnlinePlayers()
 	size = Bukkit.getOnlinePlayers().size()
 	kickno = 0

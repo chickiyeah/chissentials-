@@ -1,5 +1,6 @@
 //치센셜 gm//
 //Made by Chickiyeah//
+//ver 2020-06-01 0.2.3//
 import org.bukkit.Bukkit
 IF $isop || $haspermission:"chissentials.gm" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.gmset"
 	IF args.length == 0

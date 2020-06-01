@@ -34,20 +34,17 @@ IF !logpath.exists()
 ELSE
 ENDIF
 
-	configFile = File("./plugins/TriggerReactor/chissentials/config/config-kick-player.yml")
-	configYml = YamlConfiguration.loadConfiguration(configFile)
 	logFile = File("./plugins/TriggerReactor/chissentials/log/log-kick-player.yml")
 	LogYml = YamlConfiguration.loadConfiguration(logFile)
 	
 IF $isop || $haspermission:"chissentials.kick" || $haspermission:"chissentials.admin"
-		list = configYml.get("PlayerList")
+		list = list()
 		players = Bukkit.getOnlinePlayers()
 		size = Bukkit.getOnlinePlayers().size()
 		FOR i = 0:size
 			nick = players.get(i)
 			list.add(nick.getName())
 		ENDFOR
-		configYml.save(configFile)
 IF args.length == 0
 	player.sendMessage(color("&f&l/kick <닉네임> [사유]"))
 ELSEIF args.length == 1

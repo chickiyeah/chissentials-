@@ -1,27 +1,15 @@
 //치센셜 gmsp//
 //Made by Chickiyeah//
-import java.io.File
-import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/chissentials/config-gmsp-player.yml")
-	configYml = YamlConfiguration.loadConfiguration(configFile)
-IF {"GMSPLOADBEFORE"} != "true"
-	configYml.set("PlayerList", list())
-	configYml.save(configFile)
-	{"GMSPLOADBEFORE"} = "true"
-ELSE
-ENDIF
 IF $isop || $haspermission:"chissentials.gmsp" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.gmset"
 IF args.length == 1
-	list = configYml.get("PlayerList")
+	list = list()
 	players = Bukkit.getOnlinePlayers()
 	size = Bukkit.getOnlinePlayers().size()
 	FOR i = 0:size
 		nick = players.get(i)
 		list.add(nick.getName())
 	ENDFOR
-	configYml.save(configFile)
-	list = configYml.get("PlayerList")
 	IF list.contains(args[0])
 		SYNC
 		player(args[0]).setGameMode("SPECTATOR")

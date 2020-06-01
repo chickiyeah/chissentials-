@@ -1,16 +1,6 @@
 //치센셜 gm//
 //Made by Chickiyeah//
-import java.io.File
-import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/chissentials/config-gm-player.yml")
-	configYml = YamlConfiguration.loadConfiguration(configFile)
-IF {"GMLOADBEFORE"} != "true"
-	configYml.set("PlayerList", list())
-	configYml.save(configFile)
-	{"GMLOADBEFORE"} = "true"
-ELSE
-ENDIF
 IF $isop || $haspermission:"chissentials.gm" || $haspermission:"chissentials.admin" || $haspermission:"chissentials.gmset"
 	IF args.length == 0
 		player.sendMessage(color("&l명령어 &f:/gm 0 [닉네임] - 서바이벌모드로 설정합니다."))
@@ -18,15 +8,13 @@ IF $isop || $haspermission:"chissentials.gm" || $haspermission:"chissentials.adm
 		player.sendMessage(color("&l명령어 &f:/gm 2 [닉네임] - 모험모드로 설정합니다."))
 		player.sendMessage(color("&l명령어 &f:/gm 3 [닉네임] - 관전자모드로 설정합니다."))
 	ELSEIF args.length == 2 && $isnumber:args[0]
-		list = configYml.get("PlayerList")
+		list = list()
 		players = Bukkit.getOnlinePlayers()
 		size = Bukkit.getOnlinePlayers().size()
 		FOR i = 0:size
 			nick = players.get(i)
 			list.add(nick.getName())
 		ENDFOR
-		configYml.save(configFile)
-		list = configYml.get("PlayerList")
 		IF list.contains(args[1])
 			IF args[0] == "0"
 				SYNC

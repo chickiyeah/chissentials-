@@ -22,7 +22,7 @@ function LIST(args) {
 		
 		if(args[0] == "help"){
 			player.sendMessage('#LIST "<help/add/delete/get>" "<filename>" "<string>" "<line>"');
-			player.sendMessage('#LIST "<remove> <obj or int>"');
+			player.sendMessage('#LIST "<remove> <str or int>"');
 			return null;
 		}else{
 		}
@@ -80,11 +80,54 @@ function LIST(args) {
 						}
 					}else{
 					}
+					
+					if(typeof args[2] == 'string'){
+						var list = userYml.get('list');
+						var size = list.size();
+						if(!list.contains(args[2])){
+							player.sendMessage('Input value does not exist in the list');
+							return null;
+						}else{
+							var num = list.indexOf(args[2]);
+							list = list.remove(num);
+							userYml.save(userfile);
+							list = userYml.get('list');
+							player.sendMessage('remove success! new list! = '+list);
+						}
+					}else{
+					}
 				}else{
 					player.sendMessage('file is not exists!!');
 					return null;
 				}
 				
+			}
+		}else{
+		}
+		
+		if(args[0] == "get"){
+			if(args.length < 3){
+				player.sendMessage('Invalid parameters');
+			}else{
+				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
+				var userYml = YamlConfiguration.loadConfiguration(userfile);
+				if(userfile.exists()){
+					if(!typeof args[2] == 'number'){
+						player.sendMessage('You must type only numbers');
+						return null;
+					}else{
+						var list = userYml.get('list');
+						var size = list.size();
+						if(size < args[2]){
+							player.sendMessage('Input value is greater than maximum! maximum is '+size);
+						}else{
+						var el = list.get(args[2]-1);
+						player.sendMessage(el)
+						return el;
+						}
+					}
+				}else{
+				}
 			}
 		}else{
 		}

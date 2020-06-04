@@ -30,6 +30,7 @@ function LIST(args) {
 			player.sendMessage('$LIST:"size":"<filename>"');
 			player.sendMessage('$LIST:"indexof":"<filename>":value to search');
 			player.sendMessage('$LIST:"lineof":"<filename>":value to search');
+			player.sendMessage('$LIST:"direct":"<filename>":"run/return":"list.***"');
 			return null;
 		}else{
 		}
@@ -307,6 +308,43 @@ function LIST(args) {
 			}
 		}else{
 		}
+		
+		
+		if(args[0] == "direct"){
+			if(args.length < 2){
+				player.sendMessage('Invalid parameters $LIST:"direct":"<filename>":"run/return":"list.***"');
+			}else{
+				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
+				var userYml = YamlConfiguration.loadConfiguration(userfile);
+				if(userfile.exists()){
+					var list = userYml.get('list');
+					if(args[2] == "run"){
+						eval(args[3]);
+						userYml.save(userfile);
+						player.sendMessage('done!');
+					}else{
+					}
+					
+					if(args[2] == "return"){
+						res = eval(args[3]);
+						userYml.save(userfile);
+						if(typeof res == "number"){
+							res = res.toString();
+							player.sendMessage(res);
+							return res;
+						}else{
+							player.sendMessage(res);
+							return res;
+						}
+					}else{
+					}
+				}else{
+					player.sendMessage('file is not exists!');
+				}
+			}
+		}else{
+		}
+		
 	}
 	
 }

@@ -21,7 +21,7 @@ function LIST(args) {
 		}
 		
 		if(args[0] == "help"){
-			player.sendMessage('#LIST "<filename>" "value to add"');
+			player.sendMessage('#LIST "add" "<filename>" "value to add"');
 			player.sendMessage('#LIST "remove" "<filename>" <"value to remove" or line>');
 			player.sendMessage('#LIST "get" "<filename>" line');
 			player.sendMessage('#LIST "insert" "<filename>" "value to insert" line');

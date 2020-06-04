@@ -21,8 +21,15 @@ function LIST(args) {
 		}
 		
 		if(args[0] == "help"){
-			player.sendMessage('#LIST "<help/add/delete/get>" "<filename>" "<string>" "<line>"');
-			player.sendMessage('#LIST "<remove> <str or int>"');
+			player.sendMessage('#LIST "<filename>" "value to add"');
+			player.sendMessage('#LIST "remove" "<filename>" <"value to remove" or line>');
+			player.sendMessage('#LIST "get" "<filename>" line');
+			player.sendMessage('#LIST "insert" "<filename>" "value to insert" line');
+			player.sendMessage('#LIST "contains" "<filename>" "value to search"');
+			player.sendMessage('#LIST "set" "<filename>" "value to set" line');
+			player.sendMessage('#LIST "size" "<filename>"');
+			player.sendMessage('#LIST "indexof" "<filename>" value to search');
+			player.sendMessage('#LIST "lineof" "<filename>" value to search');
 			return null;
 		}else{
 		}
@@ -204,9 +211,9 @@ function LIST(args) {
 				}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
 				var userYml = YamlConfiguration.loadConfiguration(userfile);
-				var list = userYml.get('list');
-				var size = list.size();
 					if(userfile.exists()){
+						var list = userYml.get('list');
+						var size = list.size();
 						if(!list.contains(args[2])){
 							list = list.set(args[3] - 1 ,args[2]);
 							userYml.save(userfile);
@@ -226,7 +233,80 @@ function LIST(args) {
 			}
 		}else{
 		}
-			
+		
+		if(args[0] == 'size'){
+			if(args.length < 2){
+				player.sendMessage('Invalid parameters #LIST "size" "<filename>"');
+				player.sendMessage('This returns in a string format.');
+			}else{
+				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
+				var userYml = YamlConfiguration.loadConfiguration(userfile);
+				if(userfile.exists()){
+					var list = userYml.get('list');
+					var size = list.size();
+					player.sendMessage(size);
+					size = size.toString();
+					return size;
+				}else{
+					player.sendMessage('file is not exists!');
+					return null;
+				}
+			}
+		}else{
+		}
+		
+		if(args[0] == 'indexof'){
+			if(args.length < 3){
+				player.sendMessage('Invalid parameters #LIST "indexof" "<filename>" value to search');
+				player.sendMessage('This returns in a string format.');
+			}else{
+				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
+				var userYml = YamlConfiguration.loadConfiguration(userfile);
+				if(userfile.exists()){
+					var list = userYml.get('list');
+					if(list.contains(args[2])){
+						var index = list.indexOf(args[2]);
+						player.sendMessage(index);
+						index = index.toString();
+						return index;
+					}else{
+						player.sendMessage('Input value does not exist in the list');
+						return null;
+					}
+				}else{
+					player.sendMessage('file is not exists!');
+					return null;
+				}
+			}
+		}else{
+		}
+		
+		if(args[0] == 'lineof'){
+			if(args.length < 3){
+				player.sendMessage('Invalid parameters #LIST "lineof" "<filename>" value to search');
+				player.sendMessage('This returns in a string format.');
+			}else{
+				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
+				var userYml = YamlConfiguration.loadConfiguration(userfile);
+				if(userfile.exists()){
+					var list = userYml.get('list');
+					if(list.contains(args[2])){
+						var index = list.indexOf(args[2]);
+						index = index + 1
+						player.sendMessage(index);
+						index = index.toString();
+						return index;
+					}else{
+						player.sendMessage('Input value does not exist in the list');
+						return null;
+					}
+				}else{
+					player.sendMessage('file is not exists!');
+					return null;
+				}
+			}
+		}else{
+		}
 	}
 	
 }

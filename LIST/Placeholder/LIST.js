@@ -330,10 +330,8 @@ function LIST(args) {
 						userYml.save(userfile);
 						if(typeof res == "number"){
 							res = res.toString();
-							player.sendMessage(res);
 							return res;
 						}else{
-							player.sendMessage(res);
 							return res;
 						}
 					}else{

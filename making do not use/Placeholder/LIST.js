@@ -12,7 +12,7 @@ function LIST(args) {
 	}
 	
 	if(args.length == 0){
-			player.sendMessage('Invalid parameters type #LIST "help"');
+			player.sendMessage('Invalid parameters type $LIST "help"');
 	}else{
 		if(typeof args[0] == 'object'){
 			player.sendMessage('this type is object!!!!! where is "" ?');
@@ -21,22 +21,22 @@ function LIST(args) {
 		}
 		
 		if(args[0] == "help"){
-			player.sendMessage('#LIST "<filename>" "value to add"');
-			player.sendMessage('#LIST "remove" "<filename>" <"value to remove" or line>');
-			player.sendMessage('#LIST "get" "<filename>" line');
-			player.sendMessage('#LIST "insert" "<filename>" "value to insert" line');
-			player.sendMessage('#LIST "contains" "<filename>" "value to search"');
-			player.sendMessage('#LIST "set" "<filename>" "value to set" line');
-			player.sendMessage('#LIST "size" "<filename>"');
-			player.sendMessage('#LIST "indexof" "<filename>" value to search');
-			player.sendMessage('#LIST "lineof" "<filename>" value to search');
+			player.sendMessage('$LIST:"<filename>":"value to add"');
+			player.sendMessage('$LIST:"remove":"<filename>":<"value to remove" or line>');
+			player.sendMessage('$LIST:"get":"<filename>":line');
+			player.sendMessage('$LIST:"insert":"<filename>":"value to insert" line');
+			player.sendMessage('$LIST:"contains":"<filename>":"value to search"');
+			player.sendMessage('$LIST:"set":"<filename>":"value to set" line');
+			player.sendMessage('$LIST:"size":"<filename>"');
+			player.sendMessage('$LIST:"indexof":"<filename>":value to search');
+			player.sendMessage('$LIST:"lineof":"<filename>":value to search');
 			return null;
 		}else{
 		}
 		
 		if(args[0] == "add"){
 			if(args.length < 3){
-				player.sendMessage('Invalid parameters #LIST "<filename>" "value to add"');
+				player.sendMessage('Invalid parameters $LIST:"<filename>":"value to add"');
 				return null;
 			}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
@@ -72,7 +72,7 @@ function LIST(args) {
 		
 		if(args[0] == "remove"){
 			if(args.length < 3){
-				player.sendMessage('Invalid parameters #LIST "remove" "<filename>" <"value to remove" or line>');
+				player.sendMessage('Invalid parameters $LIST:"remove":"<filename>":<"value to remove" or line>');
 			}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
 				var userYml = YamlConfiguration.loadConfiguration(userfile);
@@ -120,7 +120,7 @@ function LIST(args) {
 		
 		if(args[0] == "get"){
 			if(args.length < 3){
-				player.sendMessage('Invalid parameters #LIST "get" "<filename>" line');
+				player.sendMessage('Invalid parameters $LIST:"get":"<filename>":line');
 			}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
 				var userYml = YamlConfiguration.loadConfiguration(userfile);
@@ -147,7 +147,7 @@ function LIST(args) {
 		
 		if(args[0] == 'insert'){
 			if(args.length < 4){
-				player.sendMessage('Invalid parameters #LIST "insert" "<filename>" "value to insert" line');
+				player.sendMessage('Invalid parameters $LIST:"insert":"<filename>":"value to insert":line');
 			}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
 				var userYml = YamlConfiguration.loadConfiguration(userfile);
@@ -184,7 +184,7 @@ function LIST(args) {
 		
 		if(args[0] == 'contains'){
 			if(args.length < 3){
-				player.sendMessage('Invalid parameters #LIST "contains" "<filename>" "value to search"')
+				player.sendMessage('Invalid parameters $LIST:"contains":"<filename>":"value to search"')
 			}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
 				var userYml = YamlConfiguration.loadConfiguration(userfile);
@@ -203,7 +203,7 @@ function LIST(args) {
 		
 		if(args[0] == 'set'){
 			if(args.length < 4){
-				player.sendMessage('Invalid parameters #LIST "set" "<filename>" "value to set" line');
+				player.sendMessage('Invalid parameters $LIST:"set":"<filename>":"value to set":line');
 			}else{
 				if(!typeof args[3] == 'number'){
 						player.sendMessage('Lines must only be numeric!!');
@@ -236,7 +236,7 @@ function LIST(args) {
 		
 		if(args[0] == 'size'){
 			if(args.length < 2){
-				player.sendMessage('Invalid parameters #LIST "size" "<filename>"');
+				player.sendMessage('Invalid parameters $LIST:"size":"<filename>"');
 				player.sendMessage('This returns in a string format.');
 			}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
@@ -257,7 +257,7 @@ function LIST(args) {
 		
 		if(args[0] == 'indexof'){
 			if(args.length < 3){
-				player.sendMessage('Invalid parameters #LIST "indexof" "<filename>" value to search');
+				player.sendMessage('Invalid parameters $LIST:"indexof":"<filename>" value to search');
 				player.sendMessage('This returns in a string format.');
 			}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');
@@ -283,7 +283,7 @@ function LIST(args) {
 		
 		if(args[0] == 'lineof'){
 			if(args.length < 3){
-				player.sendMessage('Invalid parameters #LIST "lineof" "<filename>" value to search');
+				player.sendMessage('Invalid parameters $LIST:"lineof":"<filename>" value to search');
 				player.sendMessage('This returns in a string format.');
 			}else{
 				var userfile = new File('./plugins/TriggerReactor/ListExecutor/'+args[1]+'.yml');

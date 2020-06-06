@@ -3,19 +3,16 @@ function TRY(args) {
 
 	if(args.length == 1){
 		try{
-			res = eval(args[0]);
-			player.sendMessage(res)
+			eval(args[0]);
 		} catch (e) {
 			player.sendMessage(e.name);
 			player.sendMessage(e.message);
 		}
 	}else{
 		try{
-			res = eval(args[0]);
-			player.sendMessage(res);
+			eval(args[0]);
 		} catch (e) {
-			res = eval(args[1]);
-			player.sendMessage(res);
+			eval(args[1]);
 		}
 	}
 }

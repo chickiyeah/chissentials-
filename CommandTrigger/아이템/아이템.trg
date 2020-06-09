@@ -95,9 +95,14 @@ IF $isop || $haspermisson:"chissentials.itemset"
 						beforelor = beforelore
 					ENDIF
 					lore = "&f"+$cmdline:4
+					
 					IF args[2] == "-1"
 						itemmeta = player.getInventory().getItemInHand().getItemMeta()
-						beforelor.add(color(lore))
+						IF lore == "&fnull"
+							beforelor.add(" ")
+						ELSE
+							beforelor.add(color(lore))
+						ENDIF
 						itemmeta.setLore(beforelor)
 					ELSE
 						size = beforelore.size()
@@ -109,7 +114,11 @@ IF $isop || $haspermisson:"chissentials.itemset"
 								#MESSAGE "&6&l현재 라인 최대치 : &e&l"+size
 							ELSE
 								itemmeta = player.getInventory().getItemInHand().getItemMeta()
-								beforelor.add(args2, color(lore))
+								IF lore == "&fnull"
+									beforelor.add(" ")
+								ELSE
+									beforelor.add(args2, color(lore))
+								ENDIF						
 								itemmeta.setLore(beforelor)
 							ENDIF
 						ELSE

@@ -10,7 +10,6 @@ function TRY(args) {
 			}else{
 				return res;
 			}
-			return res;
 		} catch (e) {
 			player.sendMessage(e.name);
 			player.sendMessage(e.message);
@@ -18,10 +17,21 @@ function TRY(args) {
 	}else{
 		try{
 			res = eval(args[0]);
+			if(typeof res == "number"){
+				res = res.toString();
+				return res;
+			}else{
+				return res;
+			}
 			return res;
 		} catch (e) {
 			res = eval(args[1]);
-			return res;
+			if(typeof res == "number"){
+				res = res.toString();
+				return res;
+			}else{
+				return res;
+			}
 		}
 	}
 }

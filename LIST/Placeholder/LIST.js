@@ -319,7 +319,8 @@ function LIST(args) {
 				if(userfile.exists()){
 					var list = userYml.get('list');
 					if(args[2] == "run"){
-						eval(args[3]);
+						skript = args[3].replace("name",player.getName());
+						eval(skript);
 						userYml.save(userfile);
 						player.sendMessage('done!');
 					}else{

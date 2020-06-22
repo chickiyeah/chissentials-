@@ -6,7 +6,7 @@ IF $isop
 datefile = File("./plugins/TriggerReactor/Placeholder/realdate.js")
 IF args.length == 0
 	#MESSAGE "올바르지 않는 명령어 입니다. "
-	#MESSAGE "/타이머 D H M S 예) /타이머 0D 0H 1M 0S"
+	#MESSAGE "/타이머 H M S 예) /타이머 0H 1M 0S"
 	#MESSAGE "/타이머 중단 - 타이머를 중단합니다"
 	#MESSAGE "/타이머 제거 - 타이머스코어보드를 지웁니다"
 	#STOP

@@ -24,7 +24,7 @@ IF {"Dchitimerrun"} == "true"
 	#MESSAGE "&4타이머가 흐르는 중에는 타이머 스코어보드를 제거 할 수 없습니다."
 	#STOP
 ELSE
-	#SCOREBOARD "OBJ" "timerD" "SET" {"chTmsg"} null
+	#SCOREBOARD "OBJ" "timerD" "SET" {"DchTmsg"} null
 	#MESSAGE "타이머를 제거했습니다"
 	#STOP
 ENDIF
@@ -53,33 +53,33 @@ IF args.length == 4
                     text = args[3].replace("S", "")
                     num = parseInt(text)
                     timer = timer + num
-                    IF {"chitimerrun"} != "true"
-					{"chitimerrun"} = "true"
+                    IF {"Dchitimerrun"} != "true"
+					{"Dchitimerrun"} = "true"
                     timerr = 0
-						{"timere1"} = timer / 10
-                        {"timere3"} = {"timere1"} * 3
-                        {"timere5"} = {"timere1"} * 5
+						{"Dtimere1"} = timer / 10
+                        {"Dtimere3"} = {"Dtimere1"} * 3
+                        {"Dtimere5"} = {"Dtimere1"} * 5
 					    #SCOREBOARD "OBJ" "timerD" "SLOT" "SIDEBAR"
-						{"chitimerstop"} = "false"
+						{"Dchitimerstop"} = "false"
 						name = "&b&l타이머"
                         name = name.replace("&", "§")
                         #SCOREBOARD "OBJ" "timerD" "NAME" name
                     FOR timerr = 0:timer+1
-						IF {"chitimerstop"} == "true"
-						IF {"chTmsg"} == "null"
+						IF {"Dchitimerstop"} == "true"
+						IF {"DchTmsg"} == "null"
 						ELSE
 							name = "&b&l타이머 &6&l- 중단됨"
 							name = name.replace("&", "§")
-							#SCOREBOARD "OBJ" "timerD" "SET" {"chTmsg"} null
+							#SCOREBOARD "OBJ" "timerD" "SET" {"DchTmsg"} null
 							#SCOREBOARD "OBJ" "timerD" "NAME" name
-							msg = {"chTmsg"}
+							msg = {"DchTmsg"}
 							char = msg.charAt(1).toString()
 							msg = msg.replace(char, "6")
 							msg = msg.replace("남은 시간 : ", "")
 							#SCOREBOARD "OBJ" "timerD" "SET" msg 1
-							{"chTmsg"} = msg
+							{"DchTmsg"} = msg
 							#BROADCAST "타이머가 관리자 "+playername+"에 의하여 중단되었습니다."
-							{"chitimerrun"} = "stop"
+							{"Dchitimerrun"} = "stop"
 							#STOP
 						ENDIF
 						ELSE
@@ -92,25 +92,25 @@ IF args.length == 4
                         Mm = Hh % 60
                         S = Mm
                         msg = "&a&l남은 시간 : " + D + "일 " + H + "시간 " + M + "분 " + S + "초"    
-                        IF timer > {"timere5"}
-						IF {"chTmsg"} == "null"
+                        IF timer > {"Dtimere5"}
+						IF {"DchTmsg"} == "null"
 						ELSE
-                            #SCOREBOARD "OBJ" "timerD" "SET" {"chTmsg"} null
+                            #SCOREBOARD "OBJ" "timerD" "SET" {"DchTmsg"} null
 						ENDIF
                             msg = msg.replace("&", "§")
                             #SCOREBOARD "OBJ" "timerD" "SET" msg 1
-                            {"chTmsg"} = msg
+                            {"DchTmsg"} = msg
                         ELSE                        
                             msg = msg.replace("&a", "&e")
                             msg = msg.replace("&", "§")
-							#SCOREBOARD "OBJ" "timerD" "SET" {"chTmsg"} null
+							#SCOREBOARD "OBJ" "timerD" "SET" {"DchTmsg"} null
                             #SCOREBOARD "OBJ" "timerD" "SET" msg 1
-                            {"chTmsg"} = msg
-                            IF timer < {"timere1"}
-							#SCOREBOARD "OBJ" "timerD" "SET" {"chTmsg"} null
+                            {"DchTmsg"} = msg
+                            IF timer < {"Dtimere1"}
+							#SCOREBOARD "OBJ" "timerD" "SET" {"DchTmsg"} null
                             msg = msg.replace("§e", "§4")
                             #SCOREBOARD "OBJ" "timerD" "SET" msg 1
-                            {"chTmsg"} = msg
+                            {"DchTmsg"} = msg
                             ELSE
                             ENDIF
                         ENDIF
@@ -125,7 +125,7 @@ IF args.length == 4
 							#BROADCAST	"&6&l타이머의 시간이 모두 지났습니다"
 							#ACTIONBAR "§6§l타이머의 시간이 모두 지났습니다"							
 							ENDIF
-							{"chitimerrun"} = "stop"
+							{"Dchitimerrun"} = "stop"
 							#STOP
                         ELSE
 						#WAIT 1

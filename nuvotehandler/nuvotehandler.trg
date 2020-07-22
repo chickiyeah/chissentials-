@@ -46,4 +46,3 @@ day = "토"
 {"cvenday"} = "Saturday"
 ENDIF
 {"cvday"} = day
-#BROADCAST {"cvyear"}+"year "+{"cvmonth"}+"Month "+{"cvdate"}+"date "+{"cvenday"}+ ""+{"cvenap"}+" "+{"cvapt"}+"hour "+{"cvminute"}+"Minutes "+{"cvsec"}+"Second"

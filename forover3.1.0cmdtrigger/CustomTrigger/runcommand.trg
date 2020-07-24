@@ -1,13 +1,7 @@
 import java.io.File
 message = event.getMessage()
 list1 = list()
-split = message.split(" ")
-size = split.length
-FOR i = 0:size
-split2 = split[i].toString()
-split2 = split2.replace("/", "")
-list1.add(split2)
-ENDFOR
+
 cmdlist = File("./plugins/TriggerReactor/CommandTrigger")
 i=0
 
@@ -23,6 +17,21 @@ i = i + 1
 ENDFOR
 
 message = message.replace("/" ,"")
+
+//커맨드가 다른 플러그인에 의해 강제 변경되는경우 이 사이에서 리플레이스 해주세요. 공백까지 리플레이스 해주어야합니다.
+
+message = message.replace("cmi ", "")
+
+
+
+//커맨드가 다른 플러그인에 의해 강제 변경되는경우 이 사이에서 리플레이스 해주세요. 공백까지 리플레이스 해주어야합니다.
+split = message.split(" ")
+size = split.length
+FOR i = 0:size
+split2 = split[i].toString()
+split2 = split2.replace("/", "")
+list1.add(split2)
+ENDFOR
 
 IF list1.get(0).toString().contains("trgtriggers")||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("cmd"))||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("del"))
 #STOP

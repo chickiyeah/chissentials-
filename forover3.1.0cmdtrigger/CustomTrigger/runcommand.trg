@@ -46,4 +46,3 @@ player.chat("/trgtriggers:"+message)
 ELSE
 ENDIF
 ENDFOR
-{"oncmd"} = null

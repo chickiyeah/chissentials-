@@ -136,7 +136,7 @@ function LIST(args) {
 							player.sendMessage('Input value is greater than maximum! maximum is '+size);
 						}else{
 						var el = list.get(args[2]-1);
-						player.sendMessage(el)
+					
 						return el;
 						}
 					}
@@ -192,7 +192,7 @@ function LIST(args) {
 				if(userfile.exists()){
 					var list = userYml.get('list');
 					var res = list.contains(args[2]);
-					player.sendMessage(res);
+				
 					return res;
 				}else{
 					player.sendMessage('file is not exists!');
@@ -245,7 +245,7 @@ function LIST(args) {
 				if(userfile.exists()){
 					var list = userYml.get('list');
 					var size = list.size();
-					player.sendMessage(size);
+				
 					size = size.toString();
 					return size;
 				}else{
@@ -267,7 +267,7 @@ function LIST(args) {
 					var list = userYml.get('list');
 					if(list.contains(args[2])){
 						var index = list.indexOf(args[2]);
-						player.sendMessage(index);
+					
 						index = index.toString();
 						return index;
 					}else{
@@ -294,7 +294,7 @@ function LIST(args) {
 					if(list.contains(args[2])){
 						var index = list.indexOf(args[2]);
 						index = index + 1
-						player.sendMessage(index);
+					
 						index = index.toString();
 						return index;
 					}else{

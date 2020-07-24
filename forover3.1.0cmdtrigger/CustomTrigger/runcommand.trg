@@ -22,16 +22,19 @@ ENDIF
 i = i + 1
 ENDFOR
 
+message = message.replace("/" ,"")
+
 IF list1.get(0).toString().contains("trgtriggers")||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("cmd"))||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("del"))
 #STOP
 ELSE
 ENDIF
 
-FOR i = 0:size
+FOR i = 0:1
 st = list1.get(i).toString()
 IF list.contains(st)
 #CANCELEVENT
-player.chat("/trgtriggers:"+{"oncmd"})
+player.chat("/trgtriggers:"+message)
 ELSE
 ENDIF
 ENDFOR
+{"oncmd"} = null

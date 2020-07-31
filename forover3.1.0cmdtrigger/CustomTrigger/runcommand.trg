@@ -18,7 +18,7 @@ ENDFOR
 
 message = message.replace("/" ,"")
 
-// /trg 명령어를 사용할때 오류가 나는 점 수정
+// /trg 명령어를 사용할때 오류가 나는 점 수정 - merged
 
 IF message == "trg"
 #STOP

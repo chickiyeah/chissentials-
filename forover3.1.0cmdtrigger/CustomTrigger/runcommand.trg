@@ -24,10 +24,12 @@ IF message == "trg"
 #STOP
 ENDIF
 
+//If the command is forcibly changed by another plug-in, please re-place it between here, including spaces
 //커맨드가 다른 플러그인에 의해 강제 변경되는경우 이 사이에서 리플레이스 해주세요. 공백까지 리플레이스 해주어야합니다.
 
 message = message.replace("cmi ", "")
 
+//If the command is forcibly changed by another plug-in, please re-place it between here, including spaces
 //커맨드가 다른 플러그인에 의해 강제 변경되는경우 이 사이에서 리플레이스 해주세요. 공백까지 리플레이스 해주어야합니다.
 split = message.split(" ")
 size = split.length

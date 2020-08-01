@@ -39,7 +39,7 @@ split2 = split2.replace("/", "")
 list1.add(split2)
 ENDFOR
 
-IF list.get(0).toString().contains("trg")|| list1.get(0).toString().contains("trgtriggers")||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("cmd"))||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("del"))
+IF list.get(0).toString().contains("trg")|| list1.get(0).toString().contains("trgtriggers")||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("cmd"))||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("del"))||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("c"))||(list1.get(0).toString().contains("trg") && list1.get(1).toString().contains("w"))
 #STOP
 ELSE
 ENDIF

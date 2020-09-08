@@ -1,0 +1,4 @@
+{
+  "Event": "org.bukkit.event.inventory.InventoryCloseEvent",
+  "Sync": false
+}

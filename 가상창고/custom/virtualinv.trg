@@ -2,7 +2,7 @@ import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 size = event.getInventory().getSize()
-path = "./plugins/TriggerReactor/VirtualChest/{uuid}, {name}.yml"
+path = "./plugins/TriggerReactor/VirtualChest/inv/{uuid}, {name}.yml"
 uuid = player.getUniqueId().toString()
 title = event.getView().getTitle()
 name = $playername

@@ -171,6 +171,14 @@ IF $isop || $haspermisson:"chissentials.itemset"
 		ELSE
 		ENDIF
 		
+		IF args[0] == "플래그" && args[1] == "삭제"
+			itemmeta = player.getInventory().getItemInHand().getItemMeta()
+			flag = ItemFlag.valueOf(args[2])
+			itemmeta.removeItemFlags(flag)
+			player.getInventory().getItemInHand().setItemMeta(itemmeta)
+		ELSE
+		ENDIF
+		
 		IF args[0] == "인첸트"
 			itemmeta = player.getInventory().getItemInHand().getItemMeta()	
 			enc = Enchantment.getByName(args[1])

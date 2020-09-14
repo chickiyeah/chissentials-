@@ -1,4 +1,5 @@
 import org.bukkit.enchantments.Enchantment
+import org.bukkit.inventory.ItemFlag
 import java.util.Arrays
 
 IF $isop || $haspermisson:"chissentials.itemset"
@@ -24,7 +25,7 @@ IF $isop || $haspermisson:"chissentials.itemset"
 					#MESSAGE "&6&l아이템의 이름으로 설정할 것을 명령어에 같이 입력해주세요!"
 					#MESSAGE "&6&l현재 설정된 사설 이름 : "+beforename
 				ELSE
-					name = $cmdline:2
+					name = mergeArguments(args, 1)
 					itemmeta = player.getInventory().getItemInHand().getItemMeta()
 					itemmeta.setDisplayName(color(name))
 					
@@ -94,7 +95,7 @@ IF $isop || $haspermisson:"chissentials.itemset"
 					ELSE
 						beforelor = beforelore
 					ENDIF
-					lore = "&f"+$cmdline:4
+					lore = "&f"+mergeArguments(args, 3)
 					
 					IF args[2] == "-1"
 						itemmeta = player.getInventory().getItemInHand().getItemMeta()
@@ -159,6 +160,14 @@ IF $isop || $haspermisson:"chissentials.itemset"
 					ENDIF
 				ENDIF
 			ENDIF
+		ELSE		
+		ENDIF
+		
+		IF args[0] == "플래그" && args[1] == "추가"
+			itemmeta = player.getInventory().getItemInHand().getItemMeta()
+			flag = ItemFlag.valueOf(args[2])
+			itemmeta.addItemFlags(flag)
+			player.getInventory().getItemInHand().setItemMeta(itemmeta)
 		ELSE
 		ENDIF
 		

@@ -83,6 +83,7 @@ IF event.getAction().name() == "RIGHT_CLICK_BLOCK" || event.getAction().name() =
 	ittype = player.getInventory().getItem(i).getType().toString()
 	itamount = player.getInventory().getItem(i).getAmount()
 	IF ban.contains(ittype)
+	#CANCELEVENT
 	player.getInventory().clear(i)
 	#MESSAGE "&4&l"+i+"번 슬롯의 금지 아이템 "+ittype+" "+itamount+"개가 삭제되었습니다"
 	log.add($playername+"의 인벤토리 "+i+"번 슬롯의 금지 아이템 "+ittype+" "+itamount+"개가 삭제되었습니다")

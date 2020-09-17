@@ -119,12 +119,6 @@ player.sendMessage(color("추방인원 상세 : "+kickplayer+" 총 "+kickplayer.
 #LOG "관리자 "+$playername+"이 전체인원 "+size+"명중 관리자를 제외한 인원 "+kickno+"명을 추방하였습니다"
 ENDIF
 LogYml.save(logFile)
-	players = Bukkit.getOnlinePlayers()
-		FOR i = 0:forsize
-		nick = players.get(i)
-		list.remove(nick.getName())
-		ENDFOR
-		configYml.save(configFile)
 ELSE
 player.sendMessage(color("&4&l이 명령어를 사용할 수 있는 권한이 없습니다"))
 ENDIF

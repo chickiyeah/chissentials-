@@ -67,7 +67,7 @@ ELSE
 	player.sendMessage(color("&f&l/kick <닉네임> [사유]"))
 ENDIF
 ELSE
-#MESSAGE "이 명령어를 사용하기위한 권한이 없습니다."
+#MESSAGE "이 명령어를 사용하기 위한 권한이 없습니다."
 ENDIF
 	
 	

@@ -1,6 +1,7 @@
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.inventory.ItemFlag
 import java.util.Arrays
+import java.lang.Short
 
 IF $isop || $haspermisson:"chissentials.itemset"
 	IF args.length == 0
@@ -163,6 +164,13 @@ IF $isop || $haspermisson:"chissentials.itemset"
 			ENDIF
 		ELSE		
 		ENDIF
+		
+		IF args[0] == "내구도" && args[1] == "설정"
+			dur = Short.parseShort(args[2])
+			player.getInventory().getItemInHand().setDurability(dur)
+		ELSE
+		ENDIF
+		
 		
 		IF args[0] == "플래그" && args[1] == "추가"
 			itemmeta = player.getInventory().getItemInHand().getItemMeta()

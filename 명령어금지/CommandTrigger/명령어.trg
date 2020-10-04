@@ -3,7 +3,7 @@
 import java.io.File
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.Bukkit
-	configFile = File("./plugins/TriggerReactor/chissentials/config-cmd-blacklist.yml")
+	configFile = File("./plugins/TriggerReactor/config/chissentials/config-cmd-blacklist.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 	IF !configFile.exists()
 	Bukkit.getConsoleSender().sendMessage("[bancommand] config 파일 생성중...")

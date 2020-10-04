@@ -4,7 +4,7 @@ import org.bukkit.Bukkit
 Command = event.getMessage()
 Command = Command.replace("/","")
 
-	configFile = File("./plugins/TriggerReactor/chissentials/config-cmd-blacklist.yml")
+	configFile = File("./plugins/TriggerReactor/config/chissentials/config-cmd-blacklist.yml")
 	configYml = YamlConfiguration.loadConfiguration(configFile)
 list = configYml.get("blacklist")
 IF list.contains(Command)

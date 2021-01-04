@@ -1,6 +1,7 @@
 import java.lang.Short
 title = event.getView().getTitle()
 IF event.getClickedInventory() != null
+action = event.getClick().toString()
 type = event.getClickedInventory().getType().toString()
 ENDIF
 IF title.contains("교환")
@@ -12,6 +13,7 @@ pnm2 = player(pname[1])
 playerUuid = player.getUniqueId()
 slot = event.getSlot()
 target = player({playerUuid+".tradeName"})
+inv = event.getView().getTopInventory()
 	pl = title.replace("교환 ","")
 	pl = pl.split("/")
 	pl1 = pl[0]

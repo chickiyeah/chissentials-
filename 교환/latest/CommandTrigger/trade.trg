@@ -99,6 +99,10 @@ IF args.length == 1
 	ELSE
 		SYNC
 		target = player(args[0])
+		IF target == player
+			player.sendMessage(color("&f[&6TRADE&f] &c본인에게는 교환요청을 걸수 없습니다."))
+			#STOP
+		ENDIF		
 		IF target == null
 			player.sendMessage(color("&f[&6TRADE&f] &c해당 닉네임은 존재하지 않는 유저입니다."))
 			#STOP

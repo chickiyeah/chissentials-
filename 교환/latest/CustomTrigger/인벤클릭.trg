@@ -1,7 +1,9 @@
 title = event.getView().getTitle()
 IF event.getClickedInventory() != null
+action = event.getClick().toString()
 type = event.getClickedInventory().getType().toString()
 ENDIF
+
 IF title.contains("교환")
 pname = title.replace("교환 ", "")
 pname = pname.split("/")
@@ -11,10 +13,211 @@ pnm2 = player(pname[1])
 playerUuid = player.getUniqueId()
 slot = event.getSlot()
 target = player({playerUuid+".tradeName"})
+inv = event.getView().getTopInventory()
 	pl = title.replace("교환 ","")
 	pl = pl.split("/")
 	pl1 = pl[0]
 	pl2 = pl[1]
+	
+	IF (action == "SHIFT_LEFT" || action == "SHIFT_RIGHT") && type == "PLAYER" && player.getName().toString() == pl2
+		#CANCELEVENT
+		pt214 = inv.getItem(14)
+		pt215 = inv.getItem(15)
+		pt216 = inv.getItem(16)
+		pt217 = inv.getItem(17)
+		
+		pt223 = inv.getItem(23)
+		pt224 = inv.getItem(24)
+		pt225 = inv.getItem(25)
+		pt226 = inv.getItem(26)
+		
+		pt233 = inv.getItem(32)
+		pt234 = inv.getItem(33)
+		pt235 = inv.getItem(34)
+		pt236 = inv.getItem(35)
+		
+		pt241 = inv.getItem(41)
+		pt242 = inv.getItem(42)
+		pt243 = inv.getItem(43)
+		pt244 = inv.getItem(44)
+
+		IF pt214 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(14, item)
+		ELSEIF pt215 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(15, item)
+		ELSEIF pt216 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(16, item)
+		ELSEIF pt217 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(17, item)
+		ELSEIF pt223 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(23, item)
+		ELSEIF pt224 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(24, item)
+		ELSEIF pt225 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(25, item)
+		ELSEIF pt226 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(26, item)
+		ELSEIF pt233 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(32, item)
+		ELSEIF pt234 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(33, item)
+		ELSEIF pt235 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(34, item)
+		ELSEIF pt236 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(35, item)
+		ELSEIF pt241 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(41, item)
+		ELSEIF pt242 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(42, item)
+		ELSEIF pt243 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(43, item)
+		ELSEIF pt244 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(44, item)
+		ENDIF
+	ELSE
+	ENDIF	
+	
+	IF (action == "SHIFT_LEFT" || action == "SHIFT_RIGHT") && type == "PLAYER" && player.getName().toString() == pl1
+		#CANCELEVENT
+			pt19 = inv.getItem(9)
+			pt110 = inv.getItem(10)
+			pt111 = inv.getItem(11)
+			pt112 = inv.getItem(12)
+			
+			pt118 = inv.getItem(18)
+			pt119 = inv.getItem(19)
+			pt120 = inv.getItem(20)
+			pt121 = inv.getItem(21)
+			
+			pt128 = inv.getItem(27)
+			pt129 = inv.getItem(28)
+			pt130 = inv.getItem(29)
+			pt131 = inv.getItem(30)
+			
+			pt137 = inv.getItem(36)
+			pt138 = inv.getItem(37)
+			pt139 = inv.getItem(38)
+			pt140 = inv.getItem(39)
+			item = event.getCurrentItem()
+
+			IF pt19 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(9, item)
+
+			ENDIF
+			IF pt110 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(10, item)
+			ENDIF
+			IF pt111 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(11, item)
+			ENDIF
+			IF pt112 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(12, item)
+			ENDIF
+			
+			IF pt118 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(18, item)
+			ENDIF
+			IF pt119 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(19, item)
+			ENDIF
+			IF pt120 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(20, item)
+			ENDIF
+			IF pt121 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(21, item)
+			ENDIF
+			
+			IF pt128 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(27, item)
+			ENDIF
+			IF pt129 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(28, item)
+			ENDIF
+			IF pt130 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(29, item)
+			ENDIF
+			IF pt131 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(30, item)
+			ENDIF
+			
+			IF pt137 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(36, item)
+			ENDIF
+			IF pt138 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(37, item)
+			ENDIF
+			IF pt139 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(38, item)
+			ENDIF
+			IF pt140 == null
+			item = event.getCurrentItem()
+			pinv = player.getInventory().remove(item)
+			inv.setItem(39, item)
+			ENDIF
+	ELSE
+	ENDIF	
 	
 			redpane = item("RED_STAINED_GLASS_PANE", 1)
 			redpanem = redpane.getItemMeta()
@@ -73,6 +276,7 @@ target = player({playerUuid+".tradeName"})
 		ENDIF
 	ENDIF
 	
+
 	IF type == "CHEST" && player.getName().toString() == pl2 && (slot == 0 || slot == 1 || slot == 2 || slot == 3 || slot == 5 || slot == 6 || slot == 7 || slot == 8 || slot == 9 || slot == 10 || slot == 11 || slot == 12 || slot == 18 || slot == 19 || slot == 20 || slot == 21 || slot == 27 || slot == 28 || slot == 29 || slot == 30 || slot == 36 || slot == 37 || slot == 38 || slot == 39 || slot == 45 || slot == 46 || slot == 47 || slot == 48 || slot == 50 || slot == 51 || slot == 52 || slot == 53)
 		item = event.getCursor()
 		IF player.getInventory().firstEmpty() != -1

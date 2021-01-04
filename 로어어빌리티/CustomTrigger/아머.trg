@@ -3,7 +3,8 @@ IMPORT java.lang.Integer
 IMPORT java.lang.Double
 //ASYNC 장착확인
 //SYNC 헤제확인
-
+action = event.getAction()
+#BROADCAST action
 slottype = event.getSlotType()
 slot = Integer.toString(event.getSlot())
 syncitem = event.getCurrentItem()

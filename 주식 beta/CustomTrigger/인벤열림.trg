@@ -65,7 +65,6 @@ IF title == "주식" || title == "(관리자) 주식"
 			IF fgglist.size != 0
 			fggDf = fggD/fgglist.size()
 			ENDIF
-			#MESSAGE fggDf+"/"+fgglist.size()+"/"+ fggD
             clock = item("CLOCK", 1)
             clockmeta = clock.getItemMeta()
             clockmeta.setDisplayName("§6다음 변동까지 남은시간")

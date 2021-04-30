@@ -1,0 +1,4 @@
+{
+  "Sync": false,
+  "Event": "org.bukkit.event.inventory.InventoryOpenEvent"
+}

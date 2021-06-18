@@ -53,6 +53,7 @@ IF title == "주식" || title == "(관리자) 주식"
             ns = {"ch주식."+name+".현재갯수"}
             to = {"ch주식."+name+".최대갯수"}
             tc = {"ch주식."+name+".최근변동"}
+			td = {"ch주식."+name+".하락횟수"}
             up = {$playeruuid+".소유중주식."+name}
 			FOR f = 0:pay.size()
 			fgg = pay.get(f)
@@ -86,6 +87,7 @@ IF title == "주식" || title == "(관리자) 주식"
             format = String.format("%,d", np)
             lore.add("§f현재 금액 : "+format)
             lore.add("§f갯수 : "+ns+"/"+to)
+			lore.add("§f하락횟수 : "+td+"/2")
             lore.add("§f최근 변동 : "+tc)
             lore.add("§f소유중 : "+up+"개")
 			lore.add("§f나의 평균구매금액 : "+fggDf+" 원")

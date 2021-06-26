@@ -5,6 +5,7 @@ IF ($isop || $haspermission:"chi.holo.help") && (args.length == 0 || args[0] == 
 #MESSAGE "&a========홀로그램 &b트리거리엑터 ver&a========"
 #MESSAGE "&a/holo create <이름> (내용)"
 #MESSAGE "&a/holo addline <이름> <내용>"
+#MESSAGE "&a/holo delete <이름>"
 #MESSAGE "&a/holo list"
 #MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
 #MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
@@ -27,31 +28,31 @@ IF ($isop || $haspermission:"chi.holo.create") && args[0] == "create"
 	ENDIF
 	ENDFOR
 
-		{"chi.holo."+args[1]+".line1"} = mergeArguments(args,2)
+		{"chi.holo."+args[1]+".line.line1"} = mergeArguments(args,2)
 		loc = player.getLocation()
 		loc.setY(loc.getY()-1)
 		SYNC
 		entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
 		ENDSYNC
-		{"chi.holo."+args[1]+".uuid"} = entity.getUniqueId()
+		{"chi.holo."+args[1]+".uuid.uuid0"} = entity.getUniqueId()
 		entity.setGravity(false)
         entity.setVisible(false)
         entity.setSmall(true)
-        entity.setCustomName(color({"chi.holo."+args[1]+".line1"}))
+        entity.setCustomName(color({"chi.holo."+args[1]+".line.line1"}))
         entity.setCustomNameVisible(true)
         #MESSAGE "&e"+args[1]+" &a홀로그램을 생성했습니다."
 	ELSE
-		{"chi.holo."+args[1]+".line1"} = color("&a내용이 설정되지 않았습니다! /holo editline &e"+args[1]+"&a 1 <내용> 으로 내용을 수정하세요!")
+		{"chi.holo."+args[1]+".line.line1"} = color("&a내용이 설정되지 않았습니다! /holo editline &e"+args[1]+"&a 1 <내용> 으로 내용을 수정하세요!")
 		loc = player.getLocation()
 		loc.setY(loc.getY()-1)
 		SYNC
 		entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
 		ENDSYNC
-		{"chi.holo."+args[1]+".uuid"} = entity.getUniqueId()
+		{"chi.holo."+args[1]+".uuid.uuid0"} = entity.getUniqueId()
 		entity.setGravity(false)
         entity.setVisible(false)
         entity.setSmall(true)
-        entity.setCustomName(color({"chi.holo."+args[1]+".line1"}))
+        entity.setCustomName(color({"chi.holo."+args[1]+".line.line1"}))
         entity.setCustomNameVisible(true)
         #MESSAGE "&e"+args[1]+" &a홀로그램을 생성했습니다."
 	ENDIF
@@ -78,7 +79,7 @@ IF ($isop || $haspermission:"chi.holo.delete") && args[0] == "delete"
 		key.add(ke)
 		ENDFOR
 		FOR a = list.values()
-		value.add(a )
+		value.add(a)
 		ENDFOR
 		bvalue = list()
 		FOR b = 0:value.size()
@@ -90,25 +91,18 @@ IF ($isop || $haspermission:"chi.holo.delete") && args[0] == "delete"
 		c = c.replace("}", "")
 	    c = c.split(",")
 	    bvalue.add(cke)
-	    FOR cb = 0:c.length
-	      IF c[cb].contains("uuid")
-	         bvalue.add(c[cb])
-	         cnd = cb
-	      ENDIF
-	     ENDFOR
-	        FOR ca = 0:c.length
-	            IF ca != cnd
-	                bvalue.add(c[ca])
-	            ENDIF
-	        ENDFOR
-		ENDFOR
+	    ENDFOR
         IF !key.contains(args[1])
             #MESSAGE "&d해당 홀로그램은 존재하지 않습니다."
             #STOP
         ENDIF
-		uuid = {"chi.holo."+args[1]+".uuid"}
+
+        vuuid = {"chi.holo."+args[1]+".uuid"}
+		uuid = {"chi.holo."+args[1]+".uuid.uuid0"}
 		IF Bukkit.getEntity(uuid) != null && bvalue.contains(args[1])
+		    FOR uuid = vuuid.values()
 			Bukkit.getEntity(uuid).remove()
+			ENDFOR
 			{"chi.holo."+args[1]} = null
 			#MESSAGE "&e"+args[1]+" &a홀로그램 삭제완료"
 		ENDIF
@@ -134,4 +128,73 @@ IF list != null
 ELSE
     #MESSAGE kea + "&l없음"
 ENDIF
+ENDIF
+
+IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
+   IF args.length < 2
+		#MESSAGE "&a========홀로그램 &b트리거리엑터 ver&a========"
+		#MESSAGE "&a/holo create <이름> (내용)"
+		#MESSAGE "&a/holo addline <이름> <내용>"
+		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
+		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
+		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+        #STOP
+    ENDIF
+    list = {"chi.holo"}
+	IF list == null
+	   #MESSAGE "&d이 서버엔 어느 홀로그램도 없습니다."
+	   #STOP
+	ENDIF
+	key = list()
+	FOR ke = list.keySet()
+	    key.add(ke)
+    ENDFOR
+    lkey = list()
+    IF !key.contains(args[1])
+        #MESSAGE "&d해당 홀로그램은 존재하지 않습니다."
+        #STOP
+    ELSE
+        vline = {"chi.holo."+args[1]+".line"}
+        uuids = {"chi.holo."+args[1]+".uuid"}
+        uuid = list()
+        world = Bukkit.getWorld("moneygame")
+        FOR ui = uuids.values()
+        uuid.add(ui)
+        ENDFOR
+        i = uuid.size()
+        uuid = uuid.get(i-1)
+        holo = Bukkit.getEntity(uuid)
+        loc = holo.getLocation()
+        FOR lke = vline.keySet()
+        lkey.add(lke)
+        ENDFOR
+        nowline = lkey.size() + 1
+        writeline = nowline + 1
+        newy = loc.getY() - 0.25
+        loc.setY(newy)
+     	SYNC
+		entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
+		ENDSYNC
+		{"chi.holo."+args[1]+".uuid.uuid"+writeline} = entity.getUniqueId()
+		{"chi.holo."+args[1]+".line.line"+writeline} = mergeArguments(args,2)
+		entity.setGravity(false)
+        entity.setVisible(false)
+        entity.setSmall(true)
+        entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+writeline}))
+        entity.setCustomNameVisible(true)
+        #MESSAGE "&e"+args[1]+" &a홀로그램에 "+mergeArguments(args,2)+"라고 추가했습니다."
+
+    ENDIF
+ENDIF
+
+IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
+       IF args.length < 3
+		#MESSAGE "&a========홀로그램 &b트리거리엑터 ver&a========"
+		#MESSAGE "&a/holo create <이름> (내용)"
+		#MESSAGE "&a/holo addline <이름> <내용>"
+		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
+		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
+		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+        #STOP
+    ENDIF
 ENDIF

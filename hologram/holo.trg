@@ -157,7 +157,7 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
         vline = {"chi.holo."+args[1]+".line"}
         uuids = {"chi.holo."+args[1]+".uuid"}
         uuid = list()
-        world = Bukkit.getWorld("moneygame")
+        world = Bukkit.getWorld(player.getLocation().getWorld().getName())
         FOR ui = uuids.values()
         uuid.add(ui)
         ENDFOR

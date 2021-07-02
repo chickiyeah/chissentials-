@@ -157,6 +157,11 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
         #MESSAGE "&d해당 홀로그램은 존재하지 않습니다."
         #STOP
     ELSE
+        IF {"chi.holo."+args[1]+"lineadding"} == true
+            #MESSAGE "&4이미 이 홀로그램에 대한 라인 추가 작업이 진행중입니다!"
+            #STOP
+        ENDIF
+        {"chi.holo."+args[1]+"lineadding"} = true
         vline = {"chi.holo."+args[1]+".line"}
         uuids = {"chi.holo."+args[1]+".uuid"}
         uuid = list()
@@ -198,7 +203,7 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
         entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+writeline}))
         entity.setCustomNameVisible(true)
         #MESSAGE "&e"+args[1]+" &a홀로그램에 "+mergeArguments(args,2)+"&a라고 추가했습니다."
-
+        {"chi.holo."+args[1]+"lineadding"} = false
     ENDIF
 ENDIF
 
@@ -241,18 +246,20 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
                 #MESSAGE "&4라인이 하나밖에 없습니다! 라인을 삭제할수 없습니다!"
                 #STOP
             ENDIF
+            IF {"chi.holo."+args[1]+"linedeleting"} == true
+                #MESSAGE "&4이미 해당 홀로그램에 대해 삭제작업이 진행중입니다!"
+                #STOP
+            ENDIF
             IF lkey.size() < parseInt(args[2])
                 #MESSAGE "&d해당 라인은 존재하지 않습니다. 현재 끝라인 "+lkey.size()
                 #STOP
             ELSE
+                {"chi.holo."+args[1]+"linedeleting"} = true
                 FOR i = parseInt(args[2]):lkey.size()+1
                     j = i+1
-                    #MESSAGE "chi.holo."+args[1]+".line.line"+j
-                    #MESSAGE {"chi.holo."+args[1]+".line.line"+j}
                     entity = Bukkit.getEntity(uuid.get(i-1))
                     {"chi.holo."+args[1]+".line.line"+i} = {"chi.holo."+args[1]+".line.line"+j}
                     IF {"chi.holo."+args[1]+".line.line"+i} == null
-                        #MESSAGE "&4BREAKED"
                         #BREAK
                     ENDIF
                     entity.setCustomName(color("&b바뀌는중..."))
@@ -262,6 +269,8 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
                 {"chi.holo."+args[1]+".uuid.uuid"+lkey.size()} = null
                 {"chi.holo."+args[1]+".line.line"+lkey.size()} = null
                 {"chi.holo."+args[1]+".location.location"+lkey.size()} = null
+                j = lkey.size() - 1
+                 {"chi.holo."+args[1]+".location.adprevlocation"} = {"chi.holo."+args[1]+".location.location"+j}
 
             FOR ui = uuids.values()
                 uuid.add(ui)
@@ -280,6 +289,7 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
                     entity = Bukkit.getEntity({"chi.holo."+args[1]+".uuid.uuid"+J})
                      entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+J}))
                 ENDFOR
+                {"chi.holo."+args[1]+"linedeleting"} = false
             ENDIF
         ENDIF
     ENDIF
@@ -354,6 +364,48 @@ IF ($isop || $haspermission:"chi.holo.reset") && args[0] == "reset"
 		        ENDFOR
             {"chi.holo"} = null
             #MESSAGE "&4모든 홀로그램과 데이터를 삭제하고 초기화 했습니다."
+        ENDIF
+    ENDIF
+ENDIF
+
+IF ($isop || $haspermission:"chi.holo.editline") && args[0] == "editline"
+    IF args.length < 3
+		#MESSAGE "&a========홀로그램 &b트리거리엑터 ver&a========"
+		#MESSAGE "&a/holo create <이름> (내용)"
+		#MESSAGE "&a/holo addline <이름> <내용>"
+		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
+		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
+		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+        #STOP
+    ELSE
+        list = {"chi.holo"}
+	    IF list == null
+	        #MESSAGE "&d이 서버엔 어느 홀로그램도 없습니다."
+	        #STOP
+	    ENDIF
+	    key = list()
+	    FOR ke = list.keySet()
+	        key.add(ke)
+        ENDFOR
+        lkey = list()
+        IF !key.contains(args[1])
+            #MESSAGE "&d해당 홀로그램은 존재하지 않습니다."
+            #STOP
+        ELSE
+            vline = {"chi.holo."+args[1]+".line"}
+            key = list()
+            FOR l = vline.keySet()
+                key.add(l)
+            ENDFOR
+            IF {"chi.holo."+args[1]+".line.line"+args[2]} == null
+                #MESSAGE "&4해당 라인은 존재 하지 않습니다. 현재 끝라인 : "+key.size()
+                #STOP
+            ELSE
+                {"chi.holo."+args[1]+".line.line"+args[2]} = mergeArguments(args,3)
+                uid = {"chi.holo."+args[1]+".uuid.uuid"+args[2]}
+                Bukkit.getEntity(uid).setCustomName(color({"chi.holo."+args[1]+".line.line"+args[2]}))
+                #MESSAGE "&a성공적으로 "+args[2]+"라인의 내용을 "+mergeArguments(args,3)+"로 변경했습니다."
+            ENDIF
         ENDIF
     ENDIF
 ENDIF

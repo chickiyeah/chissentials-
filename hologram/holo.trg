@@ -10,6 +10,9 @@ IF (($isop || $haspermission:"chi.holo.help") && (args.length == 0 || args[0] ==
 #MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
 #MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
 #MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+#MESSAGE "&a/holo tphere <이름>"
+#MESSAGE "&a/holo reset"
+#MESSAGE "&a/holo regen <이름/all>"
 #STOP
 ENDIF
 
@@ -69,6 +72,9 @@ IF ($isop || $haspermission:"chi.holo.delete") && args[0] == "delete"
 		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
 		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
 		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+		#MESSAGE "&a/holo tphere <이름>"
+		#MESSAGE "&a/holo reset"
+		#MESSAGE "&a/holo regen <이름/all>"
 	ELSE
 		list = {"chi.holo"}
 	    IF list == null
@@ -141,6 +147,9 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
 		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
 		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
 		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+		#MESSAGE "&a/holo tphere <이름>"
+		#MESSAGE "&a/holo reset"
+		#MESSAGE "&a/holo regen <이름/all>"
         #STOP
     ENDIF
     list = {"chi.holo"}
@@ -215,6 +224,9 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
 		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
 		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
 		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+		#MESSAGE "&a/holo tphere <이름>"
+		#MESSAGE "&a/holo reset"
+		#MESSAGE "&a/holo regen <이름/all>"
         #STOP
     ELSE
         list = {"chi.holo"}
@@ -303,6 +315,9 @@ IF ($isop || $haspermission:"chi.holo.tphere") && args[0] == "tphere"
 		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
 		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
 		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+		#MESSAGE "&a/holo tphere <이름>"
+		#MESSAGE "&a/holo reset"
+		#MESSAGE "&a/holo regen <이름/all>"
         #STOP
     ENDIF
 	list = {"chi.holo"}
@@ -376,6 +391,9 @@ IF ($isop || $haspermission:"chi.holo.editline") && args[0] == "editline"
 		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
 		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
 		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+		#MESSAGE "&a/holo tphere <이름>"
+		#MESSAGE "&a/holo reset"
+		#MESSAGE "&a/holo regen <이름/all>"
         #STOP
     ELSE
         list = {"chi.holo"}
@@ -409,3 +427,18 @@ IF ($isop || $haspermission:"chi.holo.editline") && args[0] == "editline"
         ENDIF
     ENDIF
 ENDIF
+
+IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
+    IF args.length < 1
+		#MESSAGE "&a========홀로그램 &b트리거리엑터 ver&a========"
+		#MESSAGE "&a/holo create <이름> (내용)"
+		#MESSAGE "&a/holo addline <이름> <내용>"
+		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
+		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
+		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+		#MESSAGE "&a/holo tphere <이름>"
+		#MESSAGE "&a/holo reset"
+		#MESSAGE "&a/holo regen <이름/all>"
+        #STOP
+    ELSE
+    ENDIF

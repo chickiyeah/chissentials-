@@ -438,7 +438,7 @@ IF ($isop || $haspermission:"chi.holo.editline") && args[0] == "editline"
 ENDIF
 
 IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
-    IF args.length < 1
+    IF args.length < 2
 		#MESSAGE "&a========홀로그램 &b트리거리엑터 ver&a========"
 		#MESSAGE "&a/holo create <이름> (내용)"
 		#MESSAGE "&a/holo addline <이름> <내용>"
@@ -491,6 +491,7 @@ ENDIF
 
 IF args[0] == "maker"
     #MESSAGE "&e제작자 : 치키이예#0032"
+    #MESSAGE "&d제작자 트위치 : https://www.twitch.tv/ruddls030"
     #MESSAGE "&e제작에 도움을 주신분 : 콜다님"
     #MESSAGE "&e제작 이용 플러그인 : triggerreactor(트리거 리엑터)"
     #MESSAGE "&ahttps://github.com/TriggerReactor/TriggerReactor/releases"
@@ -502,4 +503,5 @@ IF args[0] == "maker"
 ENDIF
 
 IF ($isop || $haspermission:"chi.holo.insertline") && args[0] == "insertline"
+    
 ENDIF

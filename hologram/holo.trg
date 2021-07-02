@@ -1,3 +1,6 @@
+//triggerreactor hologram project
+//2차 수정가능 2차 배포금지 maker명령어 삭제/수정 금지
+//제작자 치키이예#0032
 IMPORT org.bukkit.Bukkit
 IMPORT org.bukkit.entity.EntityType
 
@@ -13,6 +16,7 @@ IF (($isop || $haspermission:"chi.holo.help") && (args.length == 0 || args[0] ==
 #MESSAGE "&a/holo tphere <이름>"
 #MESSAGE "&a/holo reset"
 #MESSAGE "&a/holo regen <이름/all>"
+#MESSAGE "&a/holo maker"
 #STOP
 ENDIF
 
@@ -30,8 +34,6 @@ IF ($isop || $haspermission:"chi.holo.create") && args[0] == "create"
 	    #STOP
 	    ENDIF
 	ENDIF
-
-
 		{"chi.holo."+args[1]+".line.line1"} = mergeArguments(args,2)
 		loc = player.getLocation()
 		loc.setY(loc.getY()-1)
@@ -75,6 +77,7 @@ IF ($isop || $haspermission:"chi.holo.delete") && args[0] == "delete"
 		#MESSAGE "&a/holo tphere <이름>"
 		#MESSAGE "&a/holo reset"
 		#MESSAGE "&a/holo regen <이름/all>"
+		#MESSAGE "&a/holo maker"
 	ELSE
 		list = {"chi.holo"}
 	    IF list == null
@@ -150,6 +153,7 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
 		#MESSAGE "&a/holo tphere <이름>"
 		#MESSAGE "&a/holo reset"
 		#MESSAGE "&a/holo regen <이름/all>"
+		#MESSAGE "&a/holo maker"
         #STOP
     ENDIF
     list = {"chi.holo"}
@@ -166,11 +170,11 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
         #MESSAGE "&d해당 홀로그램은 존재하지 않습니다."
         #STOP
     ELSE
-        IF {"chi.holo."+args[1]+"lineadding"} == true
+        IF {"chi.holo."+args[1]+".lineadding"} == true
             #MESSAGE "&4이미 이 홀로그램에 대한 라인 추가 작업이 진행중입니다!"
             #STOP
         ENDIF
-        {"chi.holo."+args[1]+"lineadding"} = true
+        {"chi.holo."+args[1]+".lineadding"} = true
         vline = {"chi.holo."+args[1]+".line"}
         uuids = {"chi.holo."+args[1]+".uuid"}
         uuid = list()
@@ -212,7 +216,7 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
         entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+writeline}))
         entity.setCustomNameVisible(true)
         #MESSAGE "&e"+args[1]+" &a홀로그램에 "+mergeArguments(args,2)+"&a라고 추가했습니다."
-        {"chi.holo."+args[1]+"lineadding"} = false
+        {"chi.holo."+args[1]+".lineadding"} = false
     ENDIF
 ENDIF
 
@@ -227,6 +231,7 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
 		#MESSAGE "&a/holo tphere <이름>"
 		#MESSAGE "&a/holo reset"
 		#MESSAGE "&a/holo regen <이름/all>"
+		#MESSAGE "&a/holo maker"
         #STOP
     ELSE
         list = {"chi.holo"}
@@ -258,7 +263,7 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
                 #MESSAGE "&4라인이 하나밖에 없습니다! 라인을 삭제할수 없습니다!"
                 #STOP
             ENDIF
-            IF {"chi.holo."+args[1]+"linedeleting"} == true
+            IF {"chi.holo."+args[1]+".linedeleting"} == true
                 #MESSAGE "&4이미 해당 홀로그램에 대해 삭제작업이 진행중입니다!"
                 #STOP
             ENDIF
@@ -266,7 +271,7 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
                 #MESSAGE "&d해당 라인은 존재하지 않습니다. 현재 끝라인 "+lkey.size()
                 #STOP
             ELSE
-                {"chi.holo."+args[1]+"linedeleting"} = true
+                {"chi.holo."+args[1]+".linedeleting"} = true
                 FOR i = parseInt(args[2]):lkey.size()+1
                     j = i+1
                     entity = Bukkit.getEntity(uuid.get(i-1))
@@ -301,7 +306,7 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
                     entity = Bukkit.getEntity({"chi.holo."+args[1]+".uuid.uuid"+J})
                      entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+J}))
                 ENDFOR
-                {"chi.holo."+args[1]+"linedeleting"} = false
+                {"chi.holo."+args[1]+".linedeleting"} = false
             ENDIF
         ENDIF
     ENDIF
@@ -318,6 +323,7 @@ IF ($isop || $haspermission:"chi.holo.tphere") && args[0] == "tphere"
 		#MESSAGE "&a/holo tphere <이름>"
 		#MESSAGE "&a/holo reset"
 		#MESSAGE "&a/holo regen <이름/all>"
+		#MESSAGE "&a/holo maker"
         #STOP
     ENDIF
 	list = {"chi.holo"}
@@ -356,6 +362,7 @@ IF ($isop || $haspermission:"chi.holo.reset") && args[0] == "reset"
         #MESSAGE "&4정말 모든 홀로그램과 데이터를 삭제할까요?"
         #MESSAGE "&4이 작업은 취소할수 없습니다!!"
         #MESSAGE "&4정말 초기화할거면 /holo reset confirm 을(를) 입력해주세요."
+        #STOP
     ELSE
         IF args[1] == "confirm"
         		list = {"chi.holo"}
@@ -374,11 +381,12 @@ IF ($isop || $haspermission:"chi.holo.reset") && args[0] == "reset"
 		            FOR I = 0:avalue.size()
 		                J = I + 1
 		                uid = {"chi.holo."+k+".uuid.uuid"+J}
-		                Bukkit.getEntity(uid).remove()
+                        Bukkit.getEntity(uid).remove()
 		            ENDFOR
 		        ENDFOR
             {"chi.holo"} = null
             #MESSAGE "&4모든 홀로그램과 데이터를 삭제하고 초기화 했습니다."
+            #STOP
         ENDIF
     ENDIF
 ENDIF
@@ -394,6 +402,7 @@ IF ($isop || $haspermission:"chi.holo.editline") && args[0] == "editline"
 		#MESSAGE "&a/holo tphere <이름>"
 		#MESSAGE "&a/holo reset"
 		#MESSAGE "&a/holo regen <이름/all>"
+		#MESSAGE "&a/holo maker"
         #STOP
     ELSE
         list = {"chi.holo"}
@@ -439,6 +448,58 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 		#MESSAGE "&a/holo tphere <이름>"
 		#MESSAGE "&a/holo reset"
 		#MESSAGE "&a/holo regen <이름/all>"
+		#MESSAGE "&a/holo maker"
         #STOP
     ELSE
+        IF args[1] == "all"
+        	list = {"chi.holo"}
+        	key = list()
+		        FOR ke = list.keySet()
+		        key.add(ke)
+		    ENDFOR
+		    FOR i = 1:key.size()+1
+		         j = i - 1
+		         k = key.get(j)
+		         value = {"chi.holo."+k+".line"}
+		         avalue = list()
+		         FOR uv = value.values()
+		             avalue.add(uv)
+		         ENDFOR
+		         FOR I = 0:avalue.size()
+		             J = I + 1
+		             uid = {"chi.holo."+k+".uuid.uuid"+J}
+		             IF Bukkit.getEntity(uid) != null
+		                Bukkit.getEntity(uid).remove()
+		             ENDIF
+		             loc = {"chi.holo."+k+".location.location"+J}
+		             world = loc.getWorld()
+                    SYNC
+                    entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
+                    ENDSYNC
+                    {"chi.holo."+k+".uuid.uuid"+J} = entity.getUniqueId()
+                    entity.setGravity(false)
+                    entity.setVisible(false)
+                    entity.setSmall(true)
+                    entity.setCustomName(color({"chi.holo."+k+".line.line"+J}))
+                    entity.setCustomNameVisible(true)
+		         ENDFOR
+		    ENDFOR
+		    #MESSAGE "&a모든 홀로그램을 재 소환했습니다!"
+        ENDIF
     ENDIF
+ENDIF
+
+IF args[0] == "maker"
+    #MESSAGE "&e제작자 : 치키이예#0032"
+    #MESSAGE "&e제작에 도움을 주신분 : 콜다님"
+    #MESSAGE "&e제작 이용 플러그인 : triggerreactor(트리거 리엑터)"
+    #MESSAGE "&ahttps://github.com/TriggerReactor/TriggerReactor/releases"
+    #MESSAGE "&e플러그인 디스코드 : https://discord.gg/U3pyUYc"
+    #MESSAGE "&a버그/개선사항 제보는 디스코드 : &e치키이예#0032&a로 남겨주시면 감사하겠습니다."
+    #MESSAGE "&e트리거 리엑터 플러그인을 만들어주신 wyshon님에게 다시한번 감사를 표합니다."
+    #MESSAGE "&4본 트리거는 2차 배포가 금지되어있습니다. Secondary deployment is not allowed."
+    #STOP
+ENDIF
+
+IF ($isop || $haspermission:"chi.holo.insertline") && args[0] == "insertline"
+ENDIF

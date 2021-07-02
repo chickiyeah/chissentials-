@@ -485,6 +485,40 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 		         ENDFOR
 		    ENDFOR
 		    #MESSAGE "&a모든 홀로그램을 재 소환했습니다!"
+		ELSE
+		    list = {"chi.holo"}
+        	key = list()
+		        FOR ke = list.keySet()
+		        key.add(ke)
+		    ENDFOR
+		    IF key.contains(args[1])
+                 value = {"chi.holo."+args[1]+".line"}
+		         avalue = list()
+		         FOR uv = value.values()
+		             avalue.add(uv)
+		         ENDFOR
+		         FOR I = 0:avalue.size()
+		             J = I + 1
+		             uid = {"chi.holo."+args[1]+".uuid.uuid"+J}
+		             IF Bukkit.getEntity(uid) != null
+		                Bukkit.getEntity(uid).remove()
+		             ENDIF
+		             loc = {"chi.holo."+args[1]+".location.location"+J}
+		             world = loc.getWorld()
+                    SYNC
+                    entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
+                    ENDSYNC
+                    {"chi.holo."+args[1]+".uuid.uuid"+J} = entity.getUniqueId()
+                    entity.setGravity(false)
+                    entity.setVisible(false)
+                    entity.setSmall(true)
+                    entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+J}))
+                    entity.setCustomNameVisible(true)
+		         ENDFOR
+		         #MESSAGE "&a"+args[1]+" 홀로그램을 재 소환했습니다!"
+		    ELSE
+		        #MESSAGE "&4해당 트리거는 존재하지 않습니다."
+		    ENDIF
         ENDIF
     ENDIF
 ENDIF
@@ -503,5 +537,33 @@ IF args[0] == "maker"
 ENDIF
 
 IF ($isop || $haspermission:"chi.holo.insertline") && args[0] == "insertline"
-    
+     IF args.length < 3
+		#MESSAGE "&a========홀로그램 &b트리거리엑터 ver&a========"
+		#MESSAGE "&a/holo create <이름> (내용)"
+		#MESSAGE "&a/holo addline <이름> <내용>"
+		#MESSAGE "&a/holo deleteline <이름> <라인 (1부터시작)>"
+		#MESSAGE "&a/holo editline <이름> <라인 (1부터시작)> <변경할 내용>"
+		#MESSAGE "&a/holo insertline <이름> <라인> <내용>"
+		#MESSAGE "&a/holo tphere <이름>"
+		#MESSAGE "&a/holo reset"
+		#MESSAGE "&a/holo regen <이름/all>"
+		#MESSAGE "&a/holo maker"
+        #STOP
+    ELSE
+        list = {"chi.holo"}
+	    IF list == null
+	        #MESSAGE "&d이 서버엔 어느 홀로그램도 없습니다."
+	        #STOP
+	    ENDIF
+	    key = list()
+	    FOR ke = list.keySet()
+	        key.add(ke)
+        ENDFOR
+        lkey = list()
+        IF !key.contains(args[1])
+            #MESSAGE "&d해당 홀로그램은 존재하지 않습니다."
+            #STOP
+        ELSE
+        ENDIF
+    ENDIF
 ENDIF

@@ -564,6 +564,50 @@ IF ($isop || $haspermission:"chi.holo.insertline") && args[0] == "insertline"
             #MESSAGE "&d해당 홀로그램은 존재하지 않습니다."
             #STOP
         ELSE
+            vline = {"chi.holo."+args[1]+".line"}
+            key = list()
+            FOR l = vline.keySet()
+                key.add(l)
+            ENDFOR
+                j = key.size()+1
+                FOR i = parseInt(args[2]):key.size()+2
+                    k = j-1
+                    #MESSAGE "&b"+"chi.holo."+args[1]+".line.line"+j
+                    {"chi.holo."+args[1]+".line.line"+j} = {"chi.holo."+args[1]+".line.line"+k}
+                    j = j-1
+                ENDFOR
+                {"chi.holo."+args[1]+".line.line"+args[2]} = mergeArguments(args,3)
+                loc = {"chi.holo."+args[1]+".location.adprevlocation"}
+                world = loc.getWorld()
+                newy = loc.getY() - 0.25
+                loc.setY(newy)
+                {"chi.holo."+args[1]+".location.adprevlocation"} = loc
+                SYNC
+                entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
+                ENDSYNC
+
+                j = key.size()+1
+                {"chi.holo."+args[1]+".uuid.uuid"+j} = entity.getUniqueId()
+                {"chi.holo."+args[1]+".location.location"+j} = loc
+                entity.setGravity(false)
+                entity.setVisible(false)
+                entity.setSmall(true)
+                entity.setCustomName(color("."))
+                entity.setCustomNameVisible(true)
+            vline = {"chi.holo."+args[1]+".line"}
+            FOR lke = vline.keySet()
+                lkey.add(lke)
+            ENDFOR
+
+                FOR I = 0:lkey.size()
+                    J = I + 1
+                    #MESSAGE "chi.holo."+args[1]+".uuid.uuid"+J
+                    IF {"chi.holo."+args[1]+".uuid.uuid"+J} == null
+                        #BREAK
+                    ENDIF
+                    entity = Bukkit.getEntity({"chi.holo."+args[1]+".uuid.uuid"+J})
+                     entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+J}))
+                ENDFOR
         ENDIF
     ENDIF
 ENDIF

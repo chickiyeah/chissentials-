@@ -113,6 +113,7 @@ IF ($isop || $haspermission:"chi.holo.delete") && args[0] == "delete"
 		uuid = {"chi.holo."+args[1]+".uuid.uuid1"}
 		IF Bukkit.getEntity(uuid) != null && bvalue.contains(args[1])
 		    FOR uuid = vuuid.values()
+			uuid = UUID.fromString(uuid)
 			Bukkit.getEntity(uuid).remove()
 			ENDFOR
 			{"chi.holo."+args[1]} = null
@@ -473,6 +474,17 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 		                Bukkit.getEntity(uid).remove()
 		             ENDIF
 		             loc = {"chi.holo."+k+".location.location"+J}
+						locy = loc.getY()
+						K = J +1
+						IF {"chi.holo."+args[1]+".location.location"+K} != null
+						nextloc = {"chi.holo."+args[1]+".location.location"+K}
+						nextlocy = nextloc.getY()
+							IF locy - 0.25 != nextlocy
+							y = locy - 0.25
+							nextloc.setY(y)
+							{"chi.holo."+args[1]+".location.location"+K} = nextloc
+							ENDIF
+						ENDIF					 
 		             world = loc.getWorld()
                     SYNC
                     entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
@@ -485,6 +497,7 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
                     entity.setCustomNameVisible(true)
 		         ENDFOR
 		    ENDFOR
+			{"chi.holo."+k+".location.regenlocation"} = null
 		    #MESSAGE "&a모든 홀로그램을 재 소환했습니다!"
 		ELSE
 		    list = {"chi.holo"}
@@ -505,6 +518,17 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 		                Bukkit.getEntity(uid).remove()
 		             ENDIF
 		             loc = {"chi.holo."+args[1]+".location.location"+J}
+						locy = loc.getY()
+						K = J +1
+						IF {"chi.holo."+args[1]+".location.location"+K} != null
+						nextloc = {"chi.holo."+args[1]+".location.location"+K}
+						nextlocy = nextloc.getY()
+							IF locy - 0.25 != nextlocy
+							y = locy - 0.25
+							nextloc.setY(y)
+							{"chi.holo."+args[1]+".location.location"+K} = nextloc
+							ENDIF
+						ENDIF				 
 		             world = loc.getWorld()
                     SYNC
                     entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)

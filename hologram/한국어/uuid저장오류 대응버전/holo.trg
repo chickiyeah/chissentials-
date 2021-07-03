@@ -115,6 +115,7 @@ IF ($isop || $haspermission:"chi.holo.delete") && args[0] == "delete"
 		uuid = UUID.fromString(uuid)
 		IF Bukkit.getEntity(uuid) != null && bvalue.contains(args[1])
 		    FOR uuid = vuuid.values()
+			uuid = UUID.fromString(uuid)
 			Bukkit.getEntity(uuid).remove()
 			ENDFOR
 			{"chi.holo."+args[1]} = null
@@ -181,11 +182,11 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
         uuids = {"chi.holo."+args[1]+".uuid"}
         uuid = list()
         FOR ui = uuids.values()
-		ui = UUID.fromString(ui)
         uuid.add(ui)
         ENDFOR
         i = uuid.size()
         uuid = uuid.get(i-1)
+		uuid = UUID.fromString(uuid)
         holo = Bukkit.getEntity(uuid)
         loc = holo.getLocation()
         world = loc.getWorld()
@@ -486,6 +487,17 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 		                Bukkit.getEntity(uid).remove()
 		             ENDIF
 		             loc = {"chi.holo."+k+".location.location"+J}
+						locy = loc.getY()
+						K = J +1
+						IF {"chi.holo."+args[1]+".location.location"+K} != null
+						nextloc = {"chi.holo."+args[1]+".location.location"+K}
+						nextlocy = nextloc.getY()
+							IF locy - 0.25 != nextlocy
+							y = locy - 0.25
+							nextloc.setY(y)
+							{"chi.holo."+args[1]+".location.location"+K} = nextloc
+							ENDIF
+						ENDIF
 		             world = loc.getWorld()
                     SYNC
                     entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
@@ -516,9 +528,21 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 		             uid = {"chi.holo."+args[1]+".uuid.uuid"+J}
 					 uid = UUID.fromString(uid)
 		             IF Bukkit.getEntity(uid) != null
+					 LOC = Bukkit.getEntity(uid).getLocation()
 		                Bukkit.getEntity(uid).remove()
 		             ENDIF
 		             loc = {"chi.holo."+args[1]+".location.location"+J}
+						locy = loc.getY()
+						K = J +1
+						IF {"chi.holo."+args[1]+".location.location"+K} != null
+						nextloc = {"chi.holo."+args[1]+".location.location"+K}
+						nextlocy = nextloc.getY()
+							IF locy - 0.25 != nextlocy
+							y = locy - 0.25
+							nextloc.setY(y)
+							{"chi.holo."+args[1]+".location.location"+K} = nextloc
+							ENDIF
+						ENDIF
 		             world = loc.getWorld()
                     SYNC
                     entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
@@ -530,6 +554,7 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
                     entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+J}))
                     entity.setCustomNameVisible(true)
 		         ENDFOR
+				 
 		         #MESSAGE "&a"+args[1]+" 홀로그램을 재 소환했습니다!"
 		    ELSE
 		        #MESSAGE "&4해당 트리거는 존재하지 않습니다."
@@ -587,7 +612,6 @@ IF ($isop || $haspermission:"chi.holo.insertline") && args[0] == "insertline"
                 j = key.size()+1
                 FOR i = parseInt(args[2]):key.size()+2
                     k = j-1
-                    #MESSAGE "&b"+"chi.holo."+args[1]+".line.line"+j
                     {"chi.holo."+args[1]+".line.line"+j} = {"chi.holo."+args[1]+".line.line"+k}
                     j = j-1
                 ENDFOR

@@ -353,6 +353,7 @@ IF ($isop || $haspermission:"chi.holo.tphere") && args[0] == "tphere"
 			playerloc.setY(playerloc.getY()-0.25)
 
 			holo.teleport(playerloc)
+			#MESSAGE "&e"+args[1]+"홀로그램을 발밑으로 이동시켰습니다!"
 		ENDFOR
 	ENDIF
 ENDIF
@@ -572,7 +573,6 @@ IF ($isop || $haspermission:"chi.holo.insertline") && args[0] == "insertline"
                 j = key.size()+1
                 FOR i = parseInt(args[2]):key.size()+2
                     k = j-1
-                    #MESSAGE "&b"+"chi.holo."+args[1]+".line.line"+j
                     {"chi.holo."+args[1]+".line.line"+j} = {"chi.holo."+args[1]+".line.line"+k}
                     j = j-1
                 ENDFOR
@@ -601,7 +601,6 @@ IF ($isop || $haspermission:"chi.holo.insertline") && args[0] == "insertline"
 
                 FOR I = 0:lkey.size()
                     J = I + 1
-                    #MESSAGE "chi.holo."+args[1]+".uuid.uuid"+J
                     IF {"chi.holo."+args[1]+".uuid.uuid"+J} == null
                         #BREAK
                     ENDIF

@@ -503,7 +503,9 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
                     entity.setGravity(false)
                     entity.setVisible(false)
                     entity.setSmall(true)
-                    entity.setCustomName(color({"chi.holo."+k+".line.line"+J}))
+					msg = {"chi.holo."+k+".line.line"+J}
+					msg = msg.toString()
+                    entity.setCustomName(color(msg))
                     entity.setCustomNameVisible(true)
 		         ENDFOR
 		    ENDFOR
@@ -548,7 +550,9 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
                     entity.setGravity(false)
                     entity.setVisible(false)
                     entity.setSmall(true)
-                    entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+J}))
+					msg = {"chi.holo."+k+".line.line"+J}
+					msg = msg.toString()
+                    entity.setCustomName(color(msg))
                     entity.setCustomNameVisible(true)
 		         ENDFOR
 		         #MESSAGE "&aSuccessfully recreated hologram &e"+args[1]

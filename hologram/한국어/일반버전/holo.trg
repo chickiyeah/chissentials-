@@ -484,7 +484,7 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 							nextloc.setY(y)
 							{"chi.holo."+args[1]+".location.location"+K} = nextloc
 							ENDIF
-						ENDIF					 
+						ENDIF				 
 		             world = loc.getWorld()
                     SYNC
                     entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)

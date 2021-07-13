@@ -3,6 +3,14 @@
 //제작자 치키이예#0032
 IMPORT org.bukkit.Bukkit
 IMPORT org.bukkit.entity.EntityType
+IMPORT io.github.wysohn.triggerreactor.core.manager.AbstractPlaceholderManager
+IMPORT io.github.wysohn.triggerreactor.core.main.TriggerReactorCore
+IMPORT java.util.HashMap
+IMPORT java.io.File
+IMPORT java.io.FileWriter
+IMPORT java.io.BufferedWriter
+IMPORT java.util.Base64
+
 
 IF (($isop || $haspermission:"chi.holo.help") && (args.length == 0 || args[0] == "help"))
 #MESSAGE "&a========홀로그램 &b트리거리엑터 ver&a========"
@@ -111,14 +119,17 @@ IF ($isop || $haspermission:"chi.holo.delete") && args[0] == "delete"
 
         vuuid = {"chi.holo."+args[1]+".uuid"}
 		uuid = {"chi.holo."+args[1]+".uuid.uuid1"}
-		IF Bukkit.getEntity(uuid) != null && bvalue.contains(args[1])
+		SYNC
+		entity = Bukkit.getEntity(uuid)
+		IF entity != null && bvalue.contains(args[1])
 		    FOR uuid = vuuid.values()
 			uuid = UUID.fromString(uuid)
-			Bukkit.getEntity(uuid).remove()
+			entity.remove()
 			ENDFOR
 			{"chi.holo."+args[1]} = null
 			#MESSAGE "&e"+args[1]+" &a홀로그램 삭제완료"
 		ENDIF
+		ENDSYNC
 	ENDIF
 ENDIF
 
@@ -157,6 +168,9 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
 		#MESSAGE "&a/holo maker"
         #STOP
     ENDIF
+
+
+
     list = {"chi.holo"}
 	IF list == null
 	   #MESSAGE "&d이 서버엔 어느 홀로그램도 없습니다."
@@ -171,11 +185,19 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
         #MESSAGE "&d해당 홀로그램은 존재하지 않습니다."
         #STOP
     ELSE
-        IF {"chi.holo."+args[1]+".lineadding"} == true
-            #MESSAGE "&4이미 이 홀로그램에 대한 라인 추가 작업이 진행중입니다!"
-            #STOP
-        ENDIF
-        {"chi.holo."+args[1]+".lineadding"} = true
+    {?"player"} = player
+    SYNC
+    player = {?"player"}
+    #MESSAGE player
+    arg = mergeArguments(args, 2)
+        script = "player = {?\"player\"};{?\"addmsg\"} = "+arg
+        plugin = TriggerReactorCore.getInstance()
+        mtrigger = plugin.getCmdManager().createTempCommandTrigger(script)
+        mtrigger.setSync(true)
+        mtrigger.activate(player, HashMap())
+        #MESSAGE {?"addmsg"}
+    ENDSYNC
+
         vline = {"chi.holo."+args[1]+".line"}
         uuids = {"chi.holo."+args[1]+".uuid"}
         uuid = list()
@@ -184,7 +206,9 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
         ENDFOR
         i = uuid.size()
         uuid = uuid.get(i-1)
+        SYNC
         holo = Bukkit.getEntity(uuid)
+        ENDSYNC
         loc = holo.getLocation()
         world = loc.getWorld()
         FOR lke = vline.keySet()
@@ -205,19 +229,23 @@ IF ($isop || $haspermission:"chi.holo.addline") && args[0] == "addline"
             ENDIF
         ENDIF
 
+
         {"chi.holo."+args[1]+".location.location"+writeline} = loc
-     	SYNC
-		entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
-		ENDSYNC
-		{"chi.holo."+args[1]+".uuid.uuid"+writeline} = entity.getUniqueId()
-		{"chi.holo."+args[1]+".line.line"+writeline} = mergeArguments(args,2)
-		entity.setGravity(false)
-        entity.setVisible(false)
-        entity.setSmall(true)
-        entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+writeline}))
-        entity.setCustomNameVisible(true)
-        #MESSAGE "&e"+args[1]+" &a홀로그램에 "+mergeArguments(args,2)+"&a라고 추가했습니다."
-        {"chi.holo."+args[1]+".lineadding"} = false
+
+        D = writeline -1
+            SYNC
+		    entity = world.spawnEntity(loc ,EntityType.ARMOR_STAND)
+		    ENDSYNC
+		    amsg = {?"addmsg"}
+		    {"chi.holo."+args[1]+".uuid.uuid"+writeline} = entity.getUniqueId()
+		    {"chi.holo."+args[1]+".line.line"+writeline} = amsg.toString()
+		    entity.setGravity(false)
+            entity.setVisible(false)
+            entity.setSmall(true)
+            entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+writeline}))
+            entity.setCustomNameVisible(true)
+            #MESSAGE "&e"+args[1]+" &a홀로그램에 "+{?"addmsg"}+"&a라고 추가했습니다."
+            {"chi.holo."+args[1]+".lineadding"} = false
     ENDIF
 ENDIF
 
@@ -264,26 +292,27 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
                 #MESSAGE "&4라인이 하나밖에 없습니다! 라인을 삭제할수 없습니다!"
                 #STOP
             ENDIF
-            IF {"chi.holo."+args[1]+".linedeleting"} == true
-                #MESSAGE "&4이미 해당 홀로그램에 대해 삭제작업이 진행중입니다!"
-                #STOP
-            ENDIF
             IF lkey.size() < parseInt(args[2])
                 #MESSAGE "&d해당 라인은 존재하지 않습니다. 현재 끝라인 "+lkey.size()
                 #STOP
             ELSE
-                {"chi.holo."+args[1]+".linedeleting"} = true
                 FOR i = parseInt(args[2]):lkey.size()+1
                     j = i+1
+                    SYNC
                     entity = Bukkit.getEntity(uuid.get(i-1))
                     {"chi.holo."+args[1]+".line.line"+i} = {"chi.holo."+args[1]+".line.line"+j}
                     IF {"chi.holo."+args[1]+".line.line"+i} == null
                         #BREAK
                     ENDIF
-                    entity.setCustomName(color("&b바뀌는중..."))
+                    IF entity != null
+                        entity.setCustomName(color("&b바뀌는중..."))
+                    ENDIF
+                    ENDSYNC
                 ENDFOR
                 uid = {"chi.holo."+args[1]+".uuid.uuid"+lkey.size()}
+                SYNC
                 Bukkit.getEntity(uid).remove()
+                ENDSYNC
                 {"chi.holo."+args[1]+".uuid.uuid"+lkey.size()} = null
                 {"chi.holo."+args[1]+".line.line"+lkey.size()} = null
                 {"chi.holo."+args[1]+".location.location"+lkey.size()} = null
@@ -304,10 +333,11 @@ IF ($isop || $haspermission:"chi.holo.deleteline") && args[0] == "deleteline"
                     IF {"chi.holo."+args[1]+".uuid.uuid"+J} == null
                         #BREAK
                     ENDIF
+                    SYNC
                     entity = Bukkit.getEntity({"chi.holo."+args[1]+".uuid.uuid"+J})
                      entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+J}))
+                    ENDSYNC
                 ENDFOR
-                {"chi.holo."+args[1]+".linedeleting"} = false
             ENDIF
         ENDIF
     ENDIF
@@ -342,6 +372,7 @@ IF ($isop || $haspermission:"chi.holo.tphere") && args[0] == "tphere"
         #STOP
     ELSE
 		vline = {"chi.holo."+args[1]+".line"}
+		SYNC
 		holo = Bukkit.getEntity({"chi.holo."+args[1]+".uuid.uuid1"})
 		FOR lke = vline.keySet()
 			lkey.add(lke)
@@ -349,13 +380,16 @@ IF ($isop || $haspermission:"chi.holo.tphere") && args[0] == "tphere"
 		nowline = lkey.size() + 1
 		playerloc = player.getLocation()
 		FOR i = 1:nowline
+		SYNC
 			holo = Bukkit.getEntity({"chi.holo."+args[1]+".uuid.uuid"+i})
 
 			playerloc.setY(playerloc.getY()-0.25)
 
 			holo.teleport(playerloc)
+	    ENDSYNC
 			#MESSAGE "&e"+args[1]+"홀로그램을 발밑으로 이동시켰습니다!"
 		ENDFOR
+		ENDSYNC
 	ENDIF
 ENDIF
 
@@ -383,7 +417,9 @@ IF ($isop || $haspermission:"chi.holo.reset") && args[0] == "reset"
 		            FOR I = 0:avalue.size()
 		                J = I + 1
 		                uid = {"chi.holo."+k+".uuid.uuid"+J}
+		                SYNC
                         Bukkit.getEntity(uid).remove()
+                        ENDSYNC
 		            ENDFOR
 		        ENDFOR
             {"chi.holo"} = null
@@ -432,7 +468,9 @@ IF ($isop || $haspermission:"chi.holo.editline") && args[0] == "editline"
             ELSE
                 {"chi.holo."+args[1]+".line.line"+args[2]} = mergeArguments(args,3)
                 uid = {"chi.holo."+args[1]+".uuid.uuid"+args[2]}
+                SYNC
                 Bukkit.getEntity(uid).setCustomName(color({"chi.holo."+args[1]+".line.line"+args[2]}))
+                ENDSYNC
                 #MESSAGE "&a성공적으로 "+args[2]+"라인의 내용을 "+mergeArguments(args,3)+"로 변경했습니다."
             ENDIF
         ENDIF
@@ -470,8 +508,11 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 		         FOR I = 0:avalue.size()
 		             J = I + 1
 		             uid = {"chi.holo."+k+".uuid.uuid"+J}
-		             IF Bukkit.getEntity(uid) != null
-		                Bukkit.getEntity(uid).remove()
+		             SYNC
+		             entity = Bukkit.getEntity(uid)
+		             ENDSYNC
+		             IF entity != null
+		                entity.remove()
 		             ENDIF
 		             loc = {"chi.holo."+k+".location.location"+J}
 						locy = loc.getY()
@@ -516,9 +557,12 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
 		         FOR I = 0:avalue.size()
 		             J = I + 1
 		             uid = {"chi.holo."+args[1]+".uuid.uuid"+J}
-		             IF Bukkit.getEntity(uid) != null
-		                Bukkit.getEntity(uid).remove()
+		             SYNC
+		             entity = Bukkit.getEntity(uid)
+		             IF entity != null
+		                entity.remove()
 		             ENDIF
+		             ENDSYNC
 		             loc = {"chi.holo."+args[1]+".location.location"+J}
 						locy = loc.getY()
 						K = J +1
@@ -538,9 +582,12 @@ IF ($isop || $haspermission:"chi.holo.regen") && args[0] == "regen"
                     {"chi.holo."+args[1]+".uuid.uuid"+J} = entity.getUniqueId()
                     entity.setGravity(false)
                     entity.setVisible(false)
-                    entity.setSmall(true)
-					msg = {"chi.holo."+k+".line.line"+J}
+					msg = {"chi.holo."+args[1]+".line.line"+J}
+					IF msg == null
+					    msg = "&e경고 : "+J+"열의 메시지를 찾지 못했습니다."
+					ELSE
 					msg = msg.toString()
+					ENDIF
                     entity.setCustomName(color(msg))
                     entity.setCustomNameVisible(true)
 		         ENDFOR
@@ -632,8 +679,10 @@ IF ($isop || $haspermission:"chi.holo.insertline") && args[0] == "insertline"
                     IF {"chi.holo."+args[1]+".uuid.uuid"+J} == null
                         #BREAK
                     ENDIF
+                    SYNC
                     entity = Bukkit.getEntity({"chi.holo."+args[1]+".uuid.uuid"+J})
                      entity.setCustomName(color({"chi.holo."+args[1]+".line.line"+J}))
+                    ENDSYNC
                 ENDFOR
         ENDIF
     ENDIF

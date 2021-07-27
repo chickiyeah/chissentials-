@@ -62,23 +62,7 @@ value = list()
 										ENDIF
 										string = samd[i].toString().substring(11, samd[i].length())
 										string = string.replace(" ","")
-										IF value == "null"
-											IF value.contains("-")
-												value = value.replaceAll("-", "nega")
-											ENDIF
-
-											IF value.contains("+")
-												value = value.replaceAll("+", "posi")
-											ENDIF
-											
-											IF value.contains("*")
-												value = value.replaceAll("*", "multi")
-											ENDIF									
-
-											IF value.contains("/")
-												value = value.replaceAll("/", "div")
-											ENDIF	
-																					
+										IF value == "null"									
 											value.add(string)
 										ENDIF
 									ENDIF
@@ -93,22 +77,7 @@ value = list()
 										ENDIF
 										string = samd[i].toString().substring(11, samd[i].length())
 										string = string.replace(" ","")
-										IF value == null
-											IF value.contains("-")
-												value = value.replaceAll("-", "nega")
-											ENDIF
-
-											IF value.contains("+")
-												value = value.replaceAll("+", "posi")
-											ENDIF
-											
-											IF value.contains("*")
-												value = value.replaceAll("*", "multi")
-											ENDIF									
-
-											IF value.contains("/")
-												value = value.replaceAll("/", "div")
-											ENDIF		
+										IF value == null		
 											value.add(string)
 										ENDIF
 									ENDIF
@@ -159,7 +128,27 @@ value = list()
 		script = script+"IF amsg == \""+name+"\"\r\nIF space == "+a+"\r\n"
 				FOR d = 0:va.size()
 						var = va.get(d)
-						script = script+" var"+va.get(d)+" = \""+va.get(d)+"\"\r\n"
+						IF var.contains("-") || var.contains("+") || var.contains("*") || var.contains("/")
+							IF var.contains("-")
+								dvar = var.replaceAll("-", "nega")
+							ENDIF
+
+							IF var.contains("+")
+								dvar = var.replaceAll("+", "posi")
+							ENDIF
+								
+							IF var.contains("*")
+								dvar = var.replaceAll("*", "multi")
+							ENDIF					
+												
+							IF var.contains("/")
+								dvar = var.replaceAll("/", "div")
+							ENDIF
+						ELSE
+							dvar = var
+						ENDIF
+
+						script = script+" var"+dvar+" = \""+va.get(d)+"\"\r\n"
 				ENDFOR
 				script = script + "IF msg.length >= "+dd+"\r\n"
 				FOR h = 0:va.size()

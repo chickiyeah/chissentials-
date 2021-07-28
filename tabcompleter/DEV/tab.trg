@@ -154,9 +154,29 @@ value = list()
 				FOR h = 0:va.size()
 					IF parseInt(args.get(h).toString()) == a - 1
 						fg = a - 1
+
 						var = va.get(h)
+						IF var.contains("-") || var.contains("+") || var.contains("*") || var.contains("/")
+							IF var.contains("-")
+								dvar = var.replaceAll("-", "nega")
+							ENDIF
+
+							IF var.contains("+")
+								dvar = var.replaceAll("+", "posi")
+							ENDIF
+								
+							IF var.contains("*")
+								dvar = var.replaceAll("*", "multi")
+							ENDIF					
+												
+							IF var.contains("/")
+								dvar = var.replaceAll("/", "div")
+							ENDIF
+						ELSE
+							dvar = var
+						ENDIF
 						IF !script.contains("IF var"+var)
-						script = script+"IF var"+va.get(h)+".contains(msg["+a+"])\r\ntablist.add(\""+va.get(h)+"\")\r\nevent.setCompletions(tablist)\r\nENDIF\r\n"
+						script = script+"IF var"+dvar+".contains(msg["+a+"])\r\ntablist.add(\""+va.get(h)+"\")\r\nevent.setCompletions(tablist)\r\nENDIF\r\n"
 						ENDIF
 					ENDIF
 				ENDFOR

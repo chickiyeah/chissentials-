@@ -26,7 +26,7 @@ FOR f = directory.listFiles()
 	ENDIF
 ENDFOR
 scriptlist = list()
-script = "IMPORT org.bukkit.Bukkit\r\nIMPORT org.apache.commons.lang3.StringUtils\r\nmsg = event.getBuffer()\r\nmsg = msg.replace(\"/\", \"\")\r\nspace = StringUtils.countMatches(msg, \" \")\r\nmsg = msg.split(\" \")\r\namsg = msg[0]\r\nplayer = event.getSender()\r\ntablist = list()\r\ntablist2 = list()\r\n"
+script = "IMPORT org.bukkit.Bukkit\r\nfds = \" \"\r\nmsg = event.getBuffer()\r\nmsg = msg.replace(\"/\", \"\")\r\nspace = 0\r\nFOR i = 0:msg.length()\r\nIF msg.charAt(i) ==  == fds.charAt(0)\r\nspace = space + 1\r\nENDIF\r\nENDFOR\r\nmsg = msg.split(\" \")\r\namsg = msg[0]\r\nplayer = event.getSender()\r\ntablist = list()\r\ntablist2 = list()\r\n"
 FOR i = 0:cmdlist.size()
 name = cmdlist.get(i)
 file = File("./plugins/TriggerReactor/CommandTrigger/"+name+".trg")
